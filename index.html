@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>قبلاوي</title>
     
     <!-- Favicon -->
@@ -23,6 +23,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    height: -webkit-fill-available;
 }
 
 /* Theme Variables - Blue & Gold */
@@ -53,8 +58,24 @@ body {
     background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-primary) 100%);
     color: var(--text-primary);
     min-height: 100vh;
+    min-height: 100dvh; /* Fix iOS Safari 100vh bug */
     overflow-x: hidden;
     position: relative;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    /* Safe area for notched phones (iPhone X+, Dynamic Island) */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+}
+
+/* Fallback for browsers that don't support dvh */
+@supports not (min-height: 100dvh) {
+    body {
+        min-height: -webkit-fill-available;
+    }
 }
 
 /* Main Background - Using the provided image */
@@ -219,45 +240,13 @@ body.fullscreen-mode .main-content {
 /* Main Content */
 .main-content {
     flex: 1;
-    padding: 20px;
-    transition: margin-right 0.3s ease;
+    padding: 16px;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
-.company-logo:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(255, 215, 0, 0.5);
-}
-
-.company-logo.fallback {
-    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 48px;
-    color: #000;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.company-logo.fallback:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(255, 215, 0, 0.5);
-}
-
-.header h1 {
-    font-size: 28px;
-    background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary), var(--accent-primary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 10px;
-}
-
-.header p {
-    color: var(--text-secondary);
-    font-size: 16px;
-}
+/* Duplicate old rules removed - using new centered layout rules below */
 
 
 
@@ -270,8 +259,12 @@ body.fullscreen-mode .main-content {
     align-items: center;
     justify-content: center;
     min-height: calc(100vh - 40px);
+    min-height: calc(100dvh - 40px);
     padding: 20px;
+    padding-top: max(20px, env(safe-area-inset-top));
+    padding-bottom: max(20px, env(safe-area-inset-bottom));
     position: relative;
+    width: 100%;
 }
 
 /* Header - Minimal Glass Container for Logo */
@@ -423,9 +416,13 @@ body.fullscreen-mode .main-content {
 }
 
 .nav-buttons-container.show {
-    max-height: 500px;
+    max-height: 50vh;
+    max-height: 50dvh;
     opacity: 1;
     margin-top: 25px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
 }
 
 /* Navigation Buttons - Luxurious Glass */
@@ -719,10 +716,15 @@ body.fullscreen-mode .main-content {
     top: 0;
     left: 0;
     width: 100vw;
+    width: 100dvw;
     height: 100vh;
+    height: 100dvh;
     background: var(--bg-primary);
     z-index: 9999;
     overflow: hidden;
+    /* Safe area for notched phones */
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
 }
 
 .sheet-header {
@@ -780,8 +782,11 @@ body.fullscreen-mode .main-content {
 
 .sheet-content {
     padding: 20px;
-    height: calc(100vh - 60px); /* Full height minus header */
+    height: calc(100vh - 60px);
+    height: calc(100dvh - 60px);
     overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
 }
 
 /* Table Container - NO OUTER BORDER */
@@ -1265,61 +1270,1051 @@ body.fullscreen-mode .main-content {
     font-size: 20px;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-    .company-logo,
-    .company-logo.fallback {
-        width: 110px;
-        height: 110px;
-        font-size: 44px;
+/* ================================================================
+   RESPONSIVE DESIGN SYSTEM - Comprehensive
+   Breakpoints:
+     - 320px  : Ultra small phones (Galaxy Fold closed, old iPhones)
+     - 360px  : Very small phones (iPhone SE 1st/2nd/3rd, Pixel 4a)
+     - 390px  : Small-mid phones (iPhone 12/13/14 mini, iPhone 15 Pro)
+     - 414px  : Standard phones (iPhone Plus/Pro Max, Galaxy S21-24)
+     - 480px  : Large phones / small landscape
+     - 768px  : Tablets (iPad Mini, Galaxy Tab)
+     - 1024px : Desktop / large tablets (iPad Pro, Surface)
+     - 1440px : Large desktops
+   ================================================================ */
+
+/* ===== 1. LANDSCAPE PHONES (all widths, short height) ===== */
+@media (max-height: 500px) and (orientation: landscape) {
+    .landing-container {
+        min-height: auto;
+        min-height: 100%;
+        padding: 8px 10px;
+        justify-content: flex-start;
+        padding-top: max(8px, env(safe-area-inset-top));
     }
     .header {
-        padding: 30px 40px;
+        padding: 12px 24px;
+        border-radius: 16px;
+    }
+    .company-logo,
+    .company-logo.fallback {
+        width: 70px;
+        height: 70px;
+        font-size: 28px;
+    }
+    .company-logo::after,
+    .company-logo.fallback::after {
+        inset: -3px;
+    }
+    .header h1 {
+        font-size: 18px;
+        margin-top: 8px;
+        margin-bottom: 2px;
+    }
+    .header p,
+    .click-hint {
+        display: none;
+    }
+    .nav-buttons-container {
+        max-width: 240px;
+    }
+    .nav-buttons-container.show {
+        max-height: calc(100dvh - 160px);
+        max-height: calc(100vh - 160px);
+        margin-top: 10px;
+    }
+    .nav-sheet-btn {
+        padding: 8px 14px;
+        font-size: 12px;
+        margin-bottom: 6px;
+        border-radius: 10px;
+    }
+    .nav-refresh-btn {
+        padding: 8px 14px;
+        font-size: 12px;
+        margin-bottom: 6px;
+        border-radius: 10px;
+    }
+    .nav-refresh-status {
+        padding: 6px;
+        font-size: 10px;
+        margin-bottom: 8px;
+    }
+    .sheet-content {
+        height: calc(100dvh - 44px);
+        height: calc(100vh - 44px);
+        padding: 6px;
+    }
+    .sheet-header {
+        padding: 8px 12px;
+    }
+    .sheet-header::before {
+        width: 20px;
+        height: 20px;
+    }
+    .back-btn {
+        padding: 6px 12px;
+        font-size: 11px;
+        border-radius: 6px;
+    }
+    .sheet-title {
+        font-size: 13px;
+    }
+    .excel-table th,
+    .excel-table td {
+        padding: 5px 8px;
+        font-size: 10px;
+    }
+}
+
+/* Landscape tablets */
+@media (min-width: 768px) and (max-height: 600px) and (orientation: landscape) {
+    .landing-container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        align-items: center;
+    }
+    .nav-buttons-container.show {
+        max-height: calc(100dvh - 100px);
+        max-height: calc(100vh - 100px);
+        margin-top: 0;
+    }
+}
+
+/* ===== 2. ULTRA SMALL PHONES (< 360px) ===== */
+/* Galaxy Fold closed, iPhone 5/5s/SE 1st gen */
+@media (max-width: 359px) {
+    .main-content {
+        padding: 10px;
+    }
+    .company-logo,
+    .company-logo.fallback {
+        width: 80px;
+        height: 80px;
+        font-size: 32px;
+    }
+    .company-logo::after,
+    .company-logo.fallback::after {
+        inset: -4px;
+    }
+    .header {
+        padding: 18px 16px;
+        border-radius: 16px;
+    }
+    .header h1 {
+        font-size: 20px;
+        margin-top: 10px;
+        margin-bottom: 4px;
+    }
+    .header p {
+        font-size: 11px;
+    }
+    .click-hint {
+        font-size: 10px;
+        margin-top: 8px;
+    }
+    .nav-buttons-container {
+        max-width: 100%;
+    }
+    .nav-buttons-container.show {
+        max-height: 50dvh;
+        max-height: 50vh;
+        overflow-y: auto;
+    }
+    .nav-sheet-btn {
+        padding: 11px 12px;
+        font-size: 12px;
+        border-radius: 12px;
+        margin-bottom: 8px;
+    }
+    .nav-refresh-btn {
+        padding: 11px 12px;
+        font-size: 12px;
+        border-radius: 12px;
+        margin-bottom: 8px;
+    }
+    .nav-refresh-status {
+        padding: 7px;
+        font-size: 10px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+    .nav-last-update {
+        font-size: 9px;
+    }
+    .loading {
+        padding: 15px 8px;
+    }
+    .loading-content {
+        padding: 16px 12px;
+        border-radius: 12px;
+        gap: 12px;
+    }
+    .loading-spinner {
+        width: 34px;
+        height: 34px;
+    }
+    .progress-container {
+        max-width: 100%;
+    }
+    .progress-text {
+        font-size: 11px;
+    }
+    .loading-steps {
+        font-size: 10px;
+    }
+    .step-icon {
+        font-size: 12px;
+    }
+    .sheet-header {
+        padding: 8px 10px;
+    }
+    .sheet-header::before {
+        width: 22px;
+        height: 22px;
+        margin-left: 5px;
+    }
+    .back-btn {
+        padding: 7px 10px;
+        font-size: 10px;
+        border-radius: 6px;
+        gap: 3px;
+    }
+    .sheet-title {
+        font-size: 12px;
+    }
+    .sheet-content {
+        padding: 6px;
+        height: calc(100dvh - 44px);
+        height: calc(100vh - 44px);
+    }
+    .excel-table {
+        font-size: 9px;
+    }
+    .excel-table th,
+    .excel-table td {
+        padding: 5px 6px;
+        font-size: 9px;
+    }
+    .excel-table th {
+        font-size: 9px;
+    }
+    .toast {
+        bottom: 8px;
+        padding: 8px 14px;
+        font-size: 10px;
+        border-radius: 6px;
+        max-width: calc(100% - 16px);
+        text-align: center;
+    }
+    .error-message {
+        margin: 8px;
+        padding: 10px;
+        font-size: 11px;
+    }
+    .modal-content {
+        width: 96%;
+        padding: 16px 12px;
+        border-radius: 14px;
+    }
+    .modal-header h2 {
+        font-size: 17px;
+    }
+    .modal-icon {
+        font-size: 32px;
+    }
+    .designer-info h3 {
+        font-size: 15px;
+    }
+    .designer-info p {
+        font-size: 11px;
+    }
+    .contact-info p {
+        font-size: 11px;
+    }
+    .designer-btn {
+        padding: 7px 12px;
+        font-size: 10px;
+        bottom: 10px;
+        left: 10px;
+        border-radius: 18px;
+    }
+    .phone-link {
+        font-size: 12px;
+        padding: 9px 12px;
+    }
+    .offline-indicator {
+        top: max(6px, env(safe-area-inset-top));
+        right: 6px;
+        padding: 5px 8px;
+        font-size: 9px;
+        border-radius: 14px;
+    }
+    .update-content {
+        padding: 20px 16px;
+        border-radius: 12px;
+    }
+    .update-text {
+        font-size: 15px;
+    }
+}
+
+/* ===== 3. SMALL PHONES (360px - 389px) ===== */
+/* iPhone SE 2nd/3rd, Pixel 4a/5a, Galaxy A series */
+@media (min-width: 360px) and (max-width: 389px) {
+    .main-content {
+        padding: 12px;
+    }
+    .company-logo,
+    .company-logo.fallback {
+        width: 95px;
+        height: 95px;
+        font-size: 38px;
+    }
+    .company-logo::after,
+    .company-logo.fallback::after {
+        inset: -5px;
+    }
+    .header {
+        padding: 22px 24px;
+        border-radius: 18px;
+    }
+    .header h1 {
+        font-size: 23px;
+        margin-top: 12px;
+        margin-bottom: 5px;
+    }
+    .header p {
+        font-size: 11px;
+    }
+    .click-hint {
+        font-size: 10px;
+        margin-top: 10px;
+    }
+    .nav-buttons-container {
+        max-width: 290px;
+    }
+    .nav-buttons-container.show {
+        max-height: 55dvh;
+        max-height: 55vh;
+        overflow-y: auto;
+    }
+    .nav-sheet-btn {
+        padding: 12px 16px;
+        font-size: 13px;
+        border-radius: 13px;
+        margin-bottom: 9px;
+    }
+    .nav-refresh-btn {
+        padding: 12px 16px;
+        font-size: 13px;
+        border-radius: 13px;
+        margin-bottom: 9px;
+    }
+    .sheet-header {
+        padding: 10px 12px;
+    }
+    .sheet-header::before {
+        width: 24px;
+        height: 24px;
+    }
+    .back-btn {
+        padding: 7px 12px;
+        font-size: 11px;
+    }
+    .sheet-title {
+        font-size: 13px;
+    }
+    .sheet-content {
+        padding: 8px;
+        height: calc(100dvh - 48px);
+        height: calc(100vh - 48px);
+    }
+    .excel-table {
+        font-size: 10px;
+    }
+    .excel-table th,
+    .excel-table td {
+        padding: 7px 9px;
+        font-size: 10px;
+    }
+    .toast {
+        bottom: 10px;
+        padding: 10px 16px;
+        font-size: 11px;
+        max-width: calc(100% - 20px);
+    }
+    .designer-btn {
+        padding: 9px 14px;
+        font-size: 11px;
+        bottom: 10px;
+        left: 10px;
+    }
+    .modal-content {
+        width: 94%;
+        padding: 20px 16px;
+    }
+}
+
+/* ===== 4. MID PHONES (390px - 413px) ===== */
+/* iPhone 12/13/14/15, iPhone 15/16 Pro, Galaxy S21-S24 */
+@media (min-width: 390px) and (max-width: 413px) {
+    .main-content {
+        padding: 14px;
+    }
+    .company-logo,
+    .company-logo.fallback {
+        width: 105px;
+        height: 105px;
+        font-size: 42px;
+    }
+    .header {
+        padding: 26px 32px;
         border-radius: 20px;
     }
     .header h1 {
         font-size: 26px;
+        margin-top: 14px;
     }
     .header p {
         font-size: 12px;
     }
-    .upload-area {
-        padding: 30px 15px;
+    .click-hint {
+        font-size: 11px;
+        margin-top: 12px;
+    }
+    .nav-buttons-container {
+        max-width: 310px;
+    }
+    .nav-buttons-container.show {
+        max-height: 58dvh;
+        max-height: 58vh;
+        overflow-y: auto;
+    }
+    .nav-sheet-btn {
+        padding: 13px 18px;
+        font-size: 13px;
+        border-radius: 14px;
+        margin-bottom: 10px;
+    }
+    .nav-refresh-btn {
+        padding: 13px 18px;
+        font-size: 13px;
+        border-radius: 14px;
+        margin-bottom: 10px;
+    }
+    .sheet-content {
+        padding: 10px;
+        height: calc(100dvh - 52px);
+        height: calc(100vh - 52px);
+    }
+    .excel-table {
+        font-size: 11px;
     }
     .excel-table th,
     .excel-table td {
-        padding: 10px;
+        padding: 8px 10px;
         font-size: 11px;
+    }
+    .toast {
+        bottom: 12px;
+        padding: 12px 18px;
+        font-size: 12px;
+        max-width: calc(100% - 24px);
     }
     .designer-btn {
         padding: 10px 16px;
         font-size: 12px;
-        bottom: 15px;
-        left: 15px;
+        bottom: 12px;
+        left: 12px;
     }
     .modal-content {
-        width: 95%;
-        padding: 20px;
+        width: 92%;
+        padding: 24px 20px;
     }
-    .modal-header h2 {
-        font-size: 20px;
+}
+
+/* ===== 5. STANDARD / LARGE PHONES (414px - 479px) ===== */
+/* iPhone Plus/Pro Max, Galaxy S21-S24 Ultra, Pixel 7/8 Pro */
+@media (min-width: 414px) and (max-width: 479px) {
+    .company-logo,
+    .company-logo.fallback {
+        width: 115px;
+        height: 115px;
+        font-size: 46px;
     }
-    .designer-info h3 {
-        font-size: 18px;
+    .header {
+        padding: 30px 38px;
+        border-radius: 22px;
     }
-    .phone-link {
-        font-size: 14px;
-        padding: 10px 16px;
+    .header h1 {
+        font-size: 28px;
     }
-    .nav-buttons-container {
-        max-width: 280px;
-    }
-    .nav-sheet-btn {
-        padding: 14px 18px;
+    .header p {
         font-size: 13px;
     }
     .click-hint {
+        font-size: 12px;
+        margin-top: 14px;
+    }
+    .nav-buttons-container {
+        max-width: 330px;
+    }
+    .nav-buttons-container.show {
+        max-height: 60dvh;
+        max-height: 60vh;
+        overflow-y: auto;
+    }
+    .nav-sheet-btn {
+        padding: 14px 20px;
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+    .sheet-content {
+        padding: 12px;
+        height: calc(100dvh - 55px);
+        height: calc(100vh - 55px);
+    }
+    .excel-table th,
+    .excel-table td {
+        padding: 9px 11px;
+        font-size: 12px;
+    }
+}
+
+/* ===== 6. VERY LARGE PHONES / SMALL TABLETS (480px - 767px) ===== */
+/* Galaxy Z Fold open, iPad Mini portrait, large Android phones */
+@media (min-width: 480px) and (max-width: 767px) {
+    .main-content {
+        padding: 20px;
+    }
+    .company-logo,
+    .company-logo.fallback {
+        width: 125px;
+        height: 125px;
+        font-size: 50px;
+    }
+    .company-logo::after,
+    .company-logo.fallback::after {
+        inset: -7px;
+    }
+    .header {
+        padding: 36px 50px;
+        border-radius: 24px;
+    }
+    .header h1 {
+        font-size: 30px;
+        margin-top: 18px;
+    }
+    .header p {
+        font-size: 14px;
+    }
+    .click-hint {
+        font-size: 13px;
+        margin-top: 16px;
+    }
+    .nav-buttons-container {
+        max-width: 380px;
+    }
+    .nav-buttons-container.show {
+        max-height: 65dvh;
+        max-height: 65vh;
+        overflow-y: auto;
+    }
+    .nav-sheet-btn {
+        padding: 15px 22px;
+        font-size: 14px;
+    }
+    .nav-refresh-btn {
+        padding: 14px 22px;
+        font-size: 14px;
+    }
+    .sheet-content {
+        padding: 16px;
+    }
+    .excel-table {
+        font-size: 13px;
+    }
+    .excel-table th,
+    .excel-table td {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+}
+
+/* ===== 7. TABLETS (768px - 1023px) ===== */
+/* iPad, Galaxy Tab S series, Surface Go */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .main-content {
+        padding: 24px;
+    }
+    .company-logo,
+    .company-logo.fallback {
+        width: 150px;
+        height: 150px;
+        font-size: 58px;
+    }
+    .company-logo::after,
+    .company-logo.fallback::after {
+        inset: -8px;
+    }
+    .header {
+        padding: 50px 70px;
+        border-radius: 28px;
+    }
+    .header h1 {
+        font-size: 36px;
+        margin-top: 22px;
+    }
+    .header p {
+        font-size: 15px;
+    }
+    .click-hint {
+        font-size: 14px;
+        margin-top: 18px;
+    }
+    .nav-buttons-container {
+        max-width: 400px;
+    }
+    .nav-buttons-container.show {
+        max-height: 70dvh;
+        max-height: 70vh;
+    }
+    .nav-sheet-btn {
+        padding: 16px 24px;
+        font-size: 15px;
+    }
+    .nav-refresh-btn {
+        padding: 15px 24px;
+        font-size: 15px;
+    }
+    .sheet-content {
+        padding: 20px;
+    }
+    .excel-table {
+        font-size: 14px;
+    }
+    .excel-table th,
+    .excel-table td {
+        padding: 12px 16px;
+        font-size: 14px;
+    }
+    .sheet-header {
+        padding: 16px 24px;
+    }
+    .sheet-title {
+        font-size: 18px;
+    }
+    .back-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+    .designer-btn {
+        padding: 12px 24px;
+        font-size: 14px;
+        bottom: 20px;
+        left: 20px;
+    }
+    .modal-content {
+        max-width: 420px;
+        padding: 32px;
+    }
+    .toast {
+        padding: 16px 28px;
+        font-size: 14px;
+    }
+}
+
+/* ===== 8. DESKTOP / LARGE TABLETS (1024px+) ===== */
+/* iPad Pro, laptops, desktop monitors */
+@media (min-width: 1024px) {
+    .main-content {
+        padding: 32px;
+    }
+    .company-logo,
+    .company-logo.fallback {
+        width: 170px;
+        height: 170px;
+        font-size: 64px;
+    }
+    .company-logo::after,
+    .company-logo.fallback::after {
+        inset: -9px;
+    }
+    .header {
+        padding: 60px 90px;
+        border-radius: 30px;
+    }
+    .header h1 {
+        font-size: 42px;
+        margin-top: 26px;
+    }
+    .header p {
+        font-size: 16px;
+    }
+    .click-hint {
+        font-size: 15px;
+        margin-top: 20px;
+    }
+    .nav-buttons-container {
+        max-width: 420px;
+    }
+    .nav-buttons-container.show {
+        max-height: 75dvh;
+        max-height: 75vh;
+    }
+    .nav-sheet-btn {
+        padding: 18px 28px;
+        font-size: 16px;
+    }
+    .nav-refresh-btn {
+        padding: 16px 28px;
+        font-size: 16px;
+    }
+    .sheet-content {
+        padding: 24px;
+    }
+    .excel-table {
+        font-size: 15px;
+    }
+    .excel-table th,
+    .excel-table td {
+        padding: 14px 20px;
+        font-size: 15px;
+    }
+    .sheet-header {
+        padding: 18px 28px;
+    }
+    .sheet-title {
+        font-size: 20px;
+    }
+    .back-btn {
+        padding: 12px 24px;
+        font-size: 15px;
+    }
+    .designer-btn {
+        padding: 14px 28px;
+        font-size: 15px;
+        bottom: 24px;
+        left: 24px;
+    }
+    .modal-content {
+        max-width: 440px;
+        padding: 36px;
+    }
+    .toast {
+        padding: 18px 32px;
+        font-size: 15px;
+    }
+}
+
+/* ===== 9. VERY LARGE SCREENS (1440px+) ===== */
+@media (min-width: 1440px) {
+    .header {
+        padding: 70px 120px;
+    }
+    .nav-buttons-container {
+        max-width: 460px;
+    }
+    .excel-table {
+        font-size: 16px;
+    }
+    .excel-table th,
+    .excel-table td {
+        padding: 16px 22px;
+        font-size: 16px;
+    }
+}
+
+/* ===== 10. TOUCH OPTIMIZATION (all touch devices) ===== */
+@media (hover: none) and (pointer: coarse) {
+    .nav-sheet-btn {
+        min-height: 48px;
+    }
+    .nav-refresh-btn {
+        min-height: 48px;
+    }
+    .back-btn {
+        min-height: 44px;
+    }
+    .designer-btn {
+        min-height: 48px;
+    }
+    .retry-btn {
+        min-height: 44px;
+    }
+    /* Remove hover effects - use active instead */
+    .nav-sheet-btn:hover {
+        transform: none;
+        background: rgba(255, 255, 255, 0.06);
+        border-color: rgba(255, 255, 255, 0.12);
+        color: var(--text-primary);
+        box-shadow: 
+            0 4px 16px rgba(0, 0, 0, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+    .nav-sheet-btn:active {
+        transform: scale(0.97);
+        background: rgba(255, 215, 0, 0.15);
+        border-color: rgba(255, 215, 0, 0.4);
+        box-shadow: 
+            0 2px 8px rgba(255, 215, 0, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    }
+    .nav-refresh-btn:hover {
+        transform: none;
+    }
+    .nav-refresh-btn:active {
+        transform: scale(0.97);
+    }
+    .company-logo:hover,
+    .company-logo.fallback:hover {
+        transform: none;
+        box-shadow: 
+            0 0 30px rgba(255, 215, 0, 0.3),
+            0 0 60px rgba(255, 215, 0, 0.1);
+    }
+    .company-logo:active,
+    .company-logo.fallback:active {
+        transform: scale(0.93);
+    }
+    .header:hover {
+        box-shadow: 
+            0 8px 32px rgba(0, 0, 0, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1),
+            0 0 0 1px rgba(255, 215, 0, 0.05);
+        border-color: rgba(255, 215, 0, 0.15);
+    }
+}
+
+/* ===== 11. HIGH DPI / RETINA SHARPENING ===== */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .company-logo {
+        border-width: 2px;
+    }
+    .header {
+        border-width: 1px;
+    }
+    .nav-sheet-btn {
+        border-width: 1px;
+    }
+}
+
+/* ===== 12. DYNAMIC ISLAND / NOTCH PHONES ===== */
+@supports (padding-top: env(safe-area-inset-top)) {
+    .offline-indicator {
+        top: max(10px, env(safe-area-inset-top));
+        right: max(10px, env(safe-area-inset-right));
+    }
+    .designer-btn {
+        bottom: max(20px, env(safe-area-inset-bottom));
+        left: max(20px, env(safe-area-inset-left));
+    }
+}
+
+/* ===== 13. FOLDABLE PHONES (Galaxy Fold, Pixel Fold) ===== */
+/* Narrow screens like folded phones */
+@media (max-width: 320px) {
+    .landing-container {
+        padding: 10px 8px;
+    }
+    .company-logo,
+    .company-logo.fallback {
+        width: 65px;
+        height: 65px;
+        font-size: 26px;
+    }
+    .company-logo::after,
+    .company-logo.fallback::after {
+        inset: -3px;
+        border-width: 1px;
+    }
+    .header {
+        padding: 14px 12px;
+        border-radius: 14px;
+    }
+    .header h1 {
+        font-size: 18px;
+        margin-top: 8px;
+        margin-bottom: 3px;
+    }
+    .header p {
+        font-size: 10px;
+    }
+    .click-hint {
+        font-size: 9px;
+        margin-top: 6px;
+    }
+    .nav-buttons-container {
+        max-width: 100%;
+    }
+    .nav-buttons-container.show {
+        max-height: 45dvh;
+        max-height: 45vh;
+    }
+    .nav-sheet-btn {
+        padding: 10px 10px;
         font-size: 11px;
+        border-radius: 10px;
+        margin-bottom: 6px;
+    }
+    .nav-refresh-btn {
+        padding: 10px 10px;
+        font-size: 11px;
+        border-radius: 10px;
+        margin-bottom: 6px;
+    }
+    .nav-refresh-status {
+        padding: 5px;
+        font-size: 9px;
+        margin-bottom: 6px;
+    }
+    .nav-last-update {
+        font-size: 8px;
+    }
+    .sheet-header {
+        padding: 6px 8px;
+    }
+    .sheet-header::before {
+        width: 18px;
+        height: 18px;
+    }
+    .back-btn {
+        padding: 5px 8px;
+        font-size: 9px;
+        border-radius: 5px;
+    }
+    .sheet-title {
+        font-size: 11px;
+    }
+    .sheet-content {
+        padding: 4px;
+        height: calc(100dvh - 38px);
+        height: calc(100vh - 38px);
+    }
+    .excel-table {
+        font-size: 8px;
+    }
+    .excel-table th,
+    .excel-table td {
+        padding: 4px 5px;
+        font-size: 8px;
+    }
+    .toast {
+        bottom: 6px;
+        padding: 6px 10px;
+        font-size: 9px;
+        max-width: calc(100% - 12px);
+    }
+    .designer-btn {
+        padding: 6px 10px;
+        font-size: 9px;
+        bottom: 8px;
+        left: 8px;
+        border-radius: 14px;
+    }
+    .offline-indicator {
+        padding: 4px 7px;
+        font-size: 8px;
+        border-radius: 12px;
+    }
+    .modal-content {
+        width: 98%;
+        padding: 14px 10px;
+        border-radius: 12px;
+    }
+    .modal-header h2 {
+        font-size: 15px;
+    }
+    .modal-icon {
+        font-size: 28px;
+    }
+    .designer-info h3 {
+        font-size: 14px;
+    }
+    .phone-link {
+        font-size: 11px;
+        padding: 8px 10px;
+    }
+}
+
+/* ===== 14. TALL / ELONGATED SCREENS (aspect ratio > 20:9) ===== */
+/* Modern Android phones with tall aspect ratios */
+@media (min-aspect-ratio: 20/9) and (max-width: 480px) {
+    .landing-container {
+        padding-top: max(24px, env(safe-area-inset-top));
+        padding-bottom: max(24px, env(safe-area-inset-bottom));
+    }
+    .nav-buttons-container.show {
+        max-height: 55dvh;
+        max-height: 55vh;
+    }
+}
+
+/* ===== 15. SHORT / WIDE SCREENS (aspect ratio < 16:9) ===== */
+/* Older phones, square-ish devices */
+@media (max-aspect-ratio: 4/3) and (max-width: 768px) {
+    .landing-container {
+        justify-content: flex-start;
+        padding-top: max(30px, env(safe-area-inset-top));
+    }
+}
+
+/* ===== 16. VERY SHORT VIEWPORT (keyboard open, split screen) ===== */
+@media (max-height: 350px) {
+    .landing-container {
+        min-height: auto;
+        min-height: 100%;
+        padding: 6px;
+        justify-content: flex-start;
+        padding-top: max(6px, env(safe-area-inset-top));
+    }
+    .header {
+        padding: 8px 16px;
+        border-radius: 12px;
+    }
+    .company-logo,
+    .company-logo.fallback {
+        width: 50px;
+        height: 50px;
+        font-size: 22px;
+    }
+    .company-logo::after,
+    .company-logo.fallback::after {
+        display: none;
+    }
+    .header h1 {
+        font-size: 16px;
+        margin-top: 6px;
+        margin-bottom: 0;
+    }
+    .header p,
+    .click-hint {
+        display: none;
+    }
+    .nav-buttons-container.show {
+        max-height: calc(100dvh - 100px);
+        max-height: calc(100vh - 100px);
+        margin-top: 6px;
+    }
+    .nav-sheet-btn {
+        padding: 6px 12px;
+        font-size: 11px;
+        margin-bottom: 4px;
+        border-radius: 8px;
+    }
+    .nav-refresh-btn {
+        padding: 6px 12px;
+        font-size: 11px;
+        margin-bottom: 4px;
+    }
+    .nav-refresh-status {
+        display: none;
+    }
+    .nav-last-update {
+        display: none;
     }
 }
 
