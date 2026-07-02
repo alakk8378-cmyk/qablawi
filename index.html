@@ -423,6 +423,7 @@ body.fullscreen-mode .main-content {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
+    padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
 }
 
 /* Navigation Buttons - Luxurious Glass */
@@ -447,6 +448,10 @@ body.fullscreen-mode .main-content {
     box-shadow: 
         0 4px 16px rgba(0, 0, 0, 0.3),
         inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+    z-index: 5;
 }
 
 .nav-sheet-btn::before {
@@ -508,6 +513,10 @@ body.fullscreen-mode .main-content {
     box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
     position: relative;
     overflow: hidden;
+    touch-action: manipulation;
+    -webkit-user-select: none;
+    user-select: none;
+    z-index: 5;
 }
 
 .nav-refresh-btn::before {
@@ -568,6 +577,22 @@ body.fullscreen-mode .main-content {
     opacity: 0.7;
 }
 
+/* When nav buttons are open, shift layout to top to prevent bottom overflow */
+.landing-container.nav-open {
+    justify-content: flex-start;
+    min-height: 100dvh;
+    min-height: 100vh;
+    padding-top: max(15px, env(safe-area-inset-top));
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+}
+
+.landing-container.nav-open .header {
+    margin-bottom: 0;
+}
+
 /* Click hint */
 .click-hint {
     color: var(--text-tertiary);
@@ -596,6 +621,7 @@ body.fullscreen-mode .main-content {
     display: flex;
     flex-direction: column;
     gap: 0;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 /* Loading Animation with Progress Bar - Enhanced Glass Effect */
@@ -1322,6 +1348,7 @@ body.fullscreen-mode .main-content {
         max-height: calc(100dvh - 160px);
         max-height: calc(100vh - 160px);
         margin-top: 10px;
+        padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
     }
     .nav-sheet-btn {
         padding: 8px 14px;
@@ -1380,6 +1407,7 @@ body.fullscreen-mode .main-content {
         max-height: calc(100dvh - 100px);
         max-height: calc(100vh - 100px);
         margin-top: 0;
+        padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
     }
 }
 
@@ -1422,6 +1450,7 @@ body.fullscreen-mode .main-content {
         max-height: 50dvh;
         max-height: 50vh;
         overflow-y: auto;
+        padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
     }
     .nav-sheet-btn {
         padding: 11px 12px;
@@ -1600,6 +1629,7 @@ body.fullscreen-mode .main-content {
         max-height: 55dvh;
         max-height: 55vh;
         overflow-y: auto;
+        padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
     }
     .nav-sheet-btn {
         padding: 12px 16px;
@@ -1692,6 +1722,7 @@ body.fullscreen-mode .main-content {
         max-height: 58dvh;
         max-height: 58vh;
         overflow-y: auto;
+        padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
     }
     .nav-sheet-btn {
         padding: 13px 18px;
@@ -1766,6 +1797,7 @@ body.fullscreen-mode .main-content {
         max-height: 60dvh;
         max-height: 60vh;
         overflow-y: auto;
+        padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
     }
     .nav-sheet-btn {
         padding: 14px 20px;
@@ -1822,6 +1854,7 @@ body.fullscreen-mode .main-content {
         max-height: 65dvh;
         max-height: 65vh;
         overflow-y: auto;
+        padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
     }
     .nav-sheet-btn {
         padding: 15px 22px;
@@ -1881,6 +1914,7 @@ body.fullscreen-mode .main-content {
     .nav-buttons-container.show {
         max-height: 70dvh;
         max-height: 70vh;
+        padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
     }
     .nav-sheet-btn {
         padding: 16px 24px;
@@ -1964,6 +1998,7 @@ body.fullscreen-mode .main-content {
     .nav-buttons-container.show {
         max-height: 75dvh;
         max-height: 75vh;
+        padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
     }
     .nav-sheet-btn {
         padding: 18px 28px;
@@ -2694,13 +2729,16 @@ window.onload = function() {
 function toggleNavButtons() {
     const container = document.getElementById('navButtonsContainer');
     const hint = document.getElementById('clickHint');
+    const landing = document.querySelector('.landing-container');
     
     if (container.classList.contains('show')) {
         container.classList.remove('show');
         if (hint) hint.classList.remove('hidden');
+        if (landing) landing.classList.remove('nav-open');
     } else {
         container.classList.add('show');
         if (hint) hint.classList.add('hidden');
+        if (landing) landing.classList.add('nav-open');
     }
 }
 
