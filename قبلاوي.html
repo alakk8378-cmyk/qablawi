@@ -1,0 +1,2520 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قبلاوي</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="https://drive.google.com/uc?export=view&id=1nQDXKUHI_DkRsqkhvtlj4YYcLWErJclQ">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://drive.google.com/uc?export=view&id=1nQDXKUHI_DkRsqkhvtlj4YYcLWErJclQ">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://drive.google.com/uc?export=view&id=1nQDXKUHI_DkRsqkhvtlj4YYcLWErJclQ">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://drive.google.com/uc?export=view&id=1nQDXKUHI_DkRsqkhvtlj4YYcLWErJclQ">
+    
+    <meta name="msapplication-TileColor" content="#0a1628">
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <meta name="theme-color" content="#0a1628">
+    
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Theme Variables - Blue & Gold */
+:root {
+    --bg-primary: #0a1628;
+    --bg-secondary: #0f2140;
+    --bg-tertiary: #162d54;
+    --bg-quaternary: #1e3a6e;
+    --text-primary: #fff;
+    --text-secondary: #d0d8e8;
+    --text-tertiary: #8a9bc0;
+    --border-color: #2a4a8a;
+    --accent-primary: #FFD700;
+    --accent-secondary: #FFC107;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --scrollbar-track: #0f2140;
+    --glass-bg-dark: rgba(15, 33, 64, 0.75);
+    --glass-border-dark: rgba(255, 255, 255, 0.12);
+    --glass-bg-light: rgba(255, 255, 255, 0.7);
+    --glass-border-light: rgba(0, 0, 0, 0.1);
+    /* Table border colors for dark theme */
+    --table-border-dark: #FFD700;
+    --table-border-light: #1e3a6e;
+    --table-border: var(--table-border-dark);
+}
+
+/* Light Theme Variables - Blue & Gold */
+body.light-theme {
+    --bg-primary: #f0f4fa;
+    --bg-secondary: #e4eaf5;
+    --bg-tertiary: #dce3f0;
+    --bg-quaternary: #d0d9eb;
+    --text-primary: #1a2744;
+    --text-secondary: #3a4d6e;
+    --text-tertiary: #6b82a8;
+    --border-color: #b8c8e0;
+    --accent-primary: #D4A017;
+    --accent-secondary: #C49212;
+    --shadow-color: rgba(20, 40, 80, 0.1);
+    --scrollbar-track: #e4eaf5;
+    --glass-bg-dark: rgba(255, 255, 255, 0.7);
+    --glass-border-dark: rgba(0, 0, 0, 0.1);
+    --glass-bg-light: rgba(255, 255, 255, 0.7);
+    --glass-border-light: rgba(0, 0, 0, 0.1);
+    --table-border: var(--table-border-light);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-primary) 100%);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* Main Background - Using the provided image */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://drive.google.com/uc?export=view&id=1DzF9_vnw_yWRv0qhMXpgIuLtFV1rQuXN');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    z-index: -2;
+    opacity: 0.95;
+    filter: brightness(0.85);
+}
+
+/* Overlay for better readability */
+.bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(10, 22, 40, 0.75) 0%, rgba(15, 33, 64, 0.55) 50%, rgba(10, 22, 40, 0.75) 100%);
+    z-index: -1;
+}
+
+body.light-theme .bg-overlay {
+    background: linear-gradient(135deg, rgba(220, 228, 245, 0.75) 0%, rgba(200, 215, 240, 0.55) 50%, rgba(220, 228, 245, 0.75) 100%);
+}
+
+/* --- Fullscreen Mode Styles --- */
+body.fullscreen-mode .header,
+body.fullscreen-mode .sidebar,
+body.fullscreen-mode .theme-toggle-btn,
+body.fullscreen-mode .designer-btn,
+body.fullscreen-mode .offline-indicator {
+    display: none !important;
+}
+
+body.fullscreen-mode .main-content {
+    padding: 0;
+}
+
+/* App Container */
+.app-container {
+    display: flex;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Sidebar - Enhanced Glass Effect */
+.sidebar {
+    width: 250px;
+    background: rgba(10, 22, 40, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-left: 1px solid rgba(255, 215, 0, 0.2);
+    padding: 20px;
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    transform: translateX(0);
+}
+
+body.light-theme .sidebar {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar.hidden {
+    transform: translateX(100%);
+}
+
+.sidebar.visible {
+    transform: translateX(0);
+}
+
+.sidebar-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+body.light-theme .sidebar-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.sidebar-header h2 {
+    font-size: 20px;
+    background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Refresh Section - Enhanced Glass Effect */
+.refresh-section {
+    margin-bottom: 20px;
+}
+
+.refresh-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    color: #000;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+.refresh-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: right 0.5s ease;
+}
+
+.refresh-btn:hover::before {
+    right: 100%;
+}
+
+.refresh-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+}
+
+.refresh-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.refresh-btn.loading {
+    pointer-events: none;
+}
+
+.refresh-icon {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.refresh-btn.loading .refresh-icon {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.auto-refresh-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 10px;
+    padding: 8px;
+    background: rgba(255, 215, 0, 0.15);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 6px;
+    font-size: 12px;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+body.light-theme .auto-refresh-status {
+    background: rgba(255, 215, 0, 0.2);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.auto-refresh-indicator {
+    width: 8px;
+    height: 8px;
+    background: #4CAF50;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+.auto-refresh-indicator.updating {
+    background: var(--accent-primary);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.last-update {
+    text-align: center;
+    font-size: 12px;
+    color: var(--text-tertiary);
+    margin-top: 10px;
+}
+
+/* Sheet Buttons - Enhanced Glass Effect */
+.sheet-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sheet-btn {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: var(--text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+body.light-theme .sheet-btn {
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.sheet-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
+    transition: right 0.5s ease;
+}
+
+.sheet-btn:hover::before {
+    right: 100%;
+}
+
+.sheet-btn:hover {
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    color: #000;
+    transform: translateX(-5px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+}
+
+.sheet-btn.active {
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    color: #000;
+    font-weight: bold;
+}
+
+.new-data-badge {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
+    color: white;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    font-weight: bold;
+    animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    padding: 20px;
+    transition: margin-right 0.3s ease;
+}
+
+.main-content.sidebar-open {
+    margin-right: 250px;
+}
+
+/* Header - Enhanced Glass Effect */
+.header {
+    background: rgba(10, 22, 40, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 20px;
+    text-align: center;
+    border-bottom: 2px solid var(--accent-primary);
+    box-shadow: 0 2px 20px rgba(255, 215, 0, 0.3);
+    margin-bottom: 30px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+body.light-theme .header {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+/* Company Logo - Clickable */
+.company-logo {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 15px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--accent-primary);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.company-logo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(255, 215, 0, 0.5);
+}
+
+.company-logo.fallback {
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.company-logo.fallback:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(255, 215, 0, 0.5);
+}
+
+.header h1 {
+    font-size: 28px;
+    background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary), var(--accent-primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+}
+
+.header p {
+    color: var(--text-secondary);
+    font-size: 16px;
+}
+
+/* Loading Animation with Progress Bar - Enhanced Glass Effect */
+.loading {
+    display: block;
+    text-align: center;
+    padding: 50px;
+}
+
+.loading-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background: rgba(10, 22, 40, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 500px;
+    margin: 0 auto;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+body.light-theme .loading-content {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid var(--bg-tertiary);
+    border-top: 3px solid var(--accent-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+.progress-container {
+    width: 100%;
+    max-width: 400px;
+    background: var(--bg-tertiary);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px var(--shadow-color);
+}
+
+.progress-bar {
+    height: 10px;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+    border-radius: 10px;
+    width: 0%;
+    transition: width 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.progress-text {
+    margin-top: 10px;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.loading-steps {
+    margin-top: 20px;
+    text-align: center;
+    color: var(--text-tertiary);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+
+.step.active {
+    opacity: 1;
+    color: var(--accent-primary);
+}
+
+.step.completed {
+    opacity: 0.8;
+    color: var(--text-secondary);
+}
+
+.step-icon {
+    font-size: 16px;
+}
+
+/* Full Screen Sheet View - Enhanced Glass Effect */
+.sheet-view {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--bg-primary);
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.sheet-header {
+    background: rgba(10, 22, 40, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--accent-primary);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+body.light-theme .sheet-header {
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.sheet-header::before {
+    content: '';
+    width: 30px;
+    height: 30px;
+    background-image: url('https://drive.google.com/uc?export=view&id=1nQDXKUHI_DkRsqkhvtlj4YYcLWErJclQ');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 10px;
+}
+
+.back-btn {
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+.back-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+}
+
+.sheet-title {
+    color: var(--accent-primary);
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.sheet-content {
+    padding: 20px;
+    height: calc(100vh - 60px); /* Full height minus header */
+    overflow: auto;
+}
+
+/* Table Container - NO OUTER BORDER */
+.table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    /* Outer border and radius removed */
+    background: var(--bg-primary);
+    position: relative;
+}
+
+/* Table - NO OUTER BORDER, AUTO LAYOUT */
+.excel-table {
+    width: auto; /* Let table size itself */
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 12px;
+    overflow: hidden;
+    /* Outer border and radius removed */
+    table-layout: auto; /* Allow columns to auto-size */
+}
+
+.excel-table th,
+.excel-table td {
+    border: 1px solid var(--table-border); /* Reduced border */
+    padding: 12px;
+    text-align: right;
+    white-space: nowrap; /* Prevent text wrapping */
+    position: relative;
+    background-clip: padding-box;
+    transition: all 0.2s ease;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    vertical-align: middle;
+    /* min-width removed to allow auto-sizing */
+}
+
+/* Enhanced header borders */
+.excel-table th {
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    color: #000;
+    font-weight: bold;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border: 1px solid var(--table-border); /* Reduced border */
+    border-bottom: 2px solid var(--table-border); /* Reduced border */
+    box-shadow: 
+        inset 0 0 0 1px rgba(255, 255, 255, 0.3),
+        0 2px 4px rgba(0, 0, 0, 0.1);
+    vertical-align: middle;
+}
+
+/* Enhanced cell borders */
+.excel-table td {
+    background-color: var(--bg-primary);
+}
+
+body.light-theme .excel-table td {
+    background-color: var(--bg-primary);
+}
+
+/* Enhanced hover effects */
+.excel-table tr:hover td {
+    background-color: rgba(255, 215, 0, 0.15);
+    border-color: var(--table-border);
+    box-shadow: 
+        inset 0 0 0 1px rgba(255, 215, 0, 0.3),
+        0 0 8px rgba(255, 215, 0, 0.2);
+}
+
+/* Enhanced light theme borders */
+body.light-theme .excel-table th,
+body.light-theme .excel-table td {
+    border-color: var(--table-border-light);
+}
+
+body.light-theme .excel-table th {
+    border-color: var(--table-border-light);
+    border-bottom: 2px solid var(--table-border-light); /* Reduced border */
+}
+
+body.light-theme .excel-table tr:hover td {
+    border-color: var(--table-border-light);
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Cell focus effect */
+.excel-table td:focus,
+.excel-table th:focus {
+    outline: 2px solid var(--table-border); /* Reduced outline */
+    outline-offset: -2px;
+    z-index: 1;
+    position: relative;
+}
+
+/* New Data Highlight */
+.new-data {
+    animation: highlightNewData 3s ease-in-out;
+    position: relative;
+}
+
+.new-data::before {
+    content: 'جديد';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
+    color: white;
+    font-size: 9px;
+    padding: 2px 5px;
+    border-radius: 8px;
+    font-weight: bold;
+    z-index: 10;
+}
+
+@keyframes highlightNewData {
+    0% { 
+        background-color: rgba(255, 215, 0, 0.8);
+        transform: scale(1.05);
+    }
+    50% { 
+        background-color: rgba(255, 215, 0, 0.4);
+        transform: scale(1.02);
+    }
+    100% { 
+        background-color: transparent;
+        transform: scale(1);
+    }
+}
+
+/* Merged cell styling */
+.merged-cell {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 165, 0, 0.05) 100%);
+    font-weight: 500;
+    text-align: center;
+    position: relative;
+}
+
+body.light-theme .merged-cell {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 165, 0, 0.1) 100%);
+}
+
+.merged-cell::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 2px dashed rgba(255, 215, 0, 0.3);
+    border-radius: 4px;
+    pointer-events: none;
+}
+
+/* Pivot Table Filter Dropdown */
+.pivot-filter {
+    position: relative;
+    cursor: pointer;
+    background-color: #f0f0f0;
+}
+
+.pivot-filter::after {
+    content: '▼';
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 10px;
+    color: #666;
+}
+
+.pivot-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 1000;
+    min-width: 150px;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+}
+
+.pivot-dropdown.show {
+    display: block;
+}
+
+.pivot-dropdown-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.pivot-dropdown-item:hover {
+    background-color: #f0f0f0;
+}
+
+.pivot-dropdown-item.selected {
+    background-color: var(--accent-primary);
+    color: #000;
+}
+
+/* Frozen pane indicator */
+.frozen-column {
+    position: sticky;
+    left: 0;
+    background: #f8f8f8 !important;
+    z-index: 5;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.frozen-column-header {
+    position: sticky;
+    left: 0;
+    top: 0;
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%) !important;
+    z-index: 20;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Toast Notification - Enhanced Glass Effect */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    color: #000;
+    padding: 15px 25px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px var(--shadow-color);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    font-weight: bold;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.toast.show {
+    opacity: 1;
+}
+
+.toast.success {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+}
+
+.toast.info {
+    background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+}
+
+/* Error Message - Enhanced Glass Effect */
+.error-message {
+    display: none;
+    background: linear-gradient(135deg, #ff5252 0%, #ff1744 100%);
+    color: white;
+    padding: 15px;
+    margin: 20px;
+    border-radius: 10px;
+    text-align: center;
+    font-weight: bold;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.retry-btn {
+    background: white;
+    color: #ff1744;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 10px;
+    transition: all 0.3s ease;
+}
+
+.retry-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
+}
+
+/* Update Animation - Enhanced Glass Effect */
+.update-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 300;
+}
+
+.update-overlay.show {
+    display: flex;
+}
+
+.update-content {
+    background: rgba(10, 22, 40, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 30px;
+    border-radius: 15px;
+    border: 2px solid var(--accent-primary);
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+}
+
+body.light-theme .update-content {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.update-spinner {
+    width: 60px;
+    height: 60px;
+    border: 4px solid var(--bg-tertiary);
+    border-top: 4px solid var(--accent-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+.update-text {
+    color: var(--accent-primary);
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+    position: fixed;
+    bottom: 80px;
+    left: 20px;
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    color: #000;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+    transition: all 0.3s ease;
+    z-index: 150;
+}
+
+.theme-toggle-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+}
+
+.theme-toggle-btn:active {
+    transform: translateY(-1px);
+}
+
+.theme-icon {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle-btn:hover .theme-icon {
+    transform: rotate(180deg);
+}
+
+/* Designer Button */
+.designer-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    color: #000;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+    transition: all 0.3s ease;
+    z-index: 150;
+}
+
+.designer-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+}
+
+.designer-btn:active {
+    transform: translateY(-1px);
+}
+
+.designer-icon {
+    font-size: 18px;
+}
+
+/* Designer Modal - Enhanced Glass Effect */
+.designer-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.designer-modal.show {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background: rgba(10, 22, 40, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 2px solid var(--accent-primary);
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
+    padding: 30px;
+    position: relative;
+    box-shadow: 0 10px 30px var(--shadow-color);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+
+body.light-theme .modal-content {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.designer-modal.show .modal-content {
+    transform: scale(1);
+}
+
+.modal-close {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: none;
+    border: none;
+    color: var(--accent-primary);
+    font-size: 24px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+    background: rgba(255, 215, 0, 0.2);
+    transform: rotate(90deg);
+}
+
+.modal-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.modal-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.modal-header h2 {
+    color: var(--accent-primary);
+    font-size: 24px;
+    margin: 0;
+}
+
+.modal-body {
+    text-align: center;
+}
+
+.designer-info {
+    margin-bottom: 25px;
+    padding: 20px;
+    background: rgba(255, 215, 0, 0.15);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+body.light-theme .designer-info {
+    background: rgba(255, 215, 0, 0.2);
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.designer-info h3 {
+    color: var(--accent-primary);
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.designer-info p {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.contact-info {
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+body.light-theme .contact-info {
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.contact-info p {
+    color: var(--text-tertiary);
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.phone-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    color: #000;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.phone-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+}
+
+.phone-icon {
+    font-size: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+    .main-content.sidebar-open {
+        margin-right: 200px;
+    }
+    .company-logo {
+        width: 100px;
+        height: 100px;
+        font-size: 40px;
+    }
+    .header h1 {
+        font-size: 24px;
+    }
+    .header::before {
+        width: 30px;
+        height: 30px;
+    }
+    .upload-area {
+        padding: 30px 15px;
+    }
+    .sheet-btn {
+        padding: 12px;
+        font-size: 12px;
+    }
+    .excel-table th,
+    .excel-table td {
+        padding: 10px;
+        font-size: 11px;
+    }
+    
+    .theme-toggle-btn {
+        padding: 10px 16px;
+        font-size: 12px;
+        bottom: 75px;
+        left: 15px;
+    }
+    .designer-btn {
+        padding: 10px 16px;
+        font-size: 12px;
+        bottom: 15px;
+        left: 15px;
+    }
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+    }
+    .modal-header h2 {
+        font-size: 20px;
+    }
+    .designer-info h3 {
+        font-size: 18px;
+    }
+    .phone-link {
+        font-size: 14px;
+        padding: 10px 16px;
+    }
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, var(--accent-secondary) 0%, var(--accent-primary) 100%);
+}
+
+/* Hidden class */
+.hidden {
+    display: none !important;
+}
+
+/* Offline indicator */
+.offline-indicator {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(135deg, #ff5252 0%, #ff1744 100%);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    z-index: 1000;
+    display: none;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.offline-indicator.show {
+    display: flex;
+}
+
+.offline-icon {
+    font-size: 14px;
+}
+
+</style>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div class="bg-overlay"></div>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar hidden" id="sidebar">
+            <div class="sidebar-header">
+                <h2>صفحات الملف</h2>
+            </div>
+            
+            <!-- Refresh Section -->
+            <div class="refresh-section">
+                <button class="refresh-btn" id="refreshBtn" onclick="refreshData()">
+                    <span class="refresh-icon">🔄</span>
+                    <span>تحديث البيانات</span>
+                </button>
+                <div class="auto-refresh-status">
+                    <div class="auto-refresh-indicator" id="autoRefreshIndicator"></div>
+                    <span>تحديث تلقائي</span>
+                </div>
+                <div class="last-update" id="lastUpdate">آخر تحديث: --:--</div>
+            </div>
+            
+            <div class="sheet-buttons" id="sheetButtons"></div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content" id="mainContent">
+            <header class="header">
+                <!-- Company Logo -->
+                <div class="company-logo fallback" id="companyLogo" onclick="toggleSidebar()">
+                    قبلاوي
+                </div>
+                
+                <h1>قبلاوي</h1>
+                <p>عرض ملفات الإكسل بكل تفاصيلها على هاتفك</p>
+            </header>
+            <div class="loading" id="loading">
+                <div class="loading-content">
+                    <div class="loading-spinner"></div>
+                    <div class="progress-container">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                    <div class="progress-text" id="progressText">0%</div>
+                    <div class="loading-steps">
+                        <div class="step" id="step1">
+                            <span class="step-icon">📡</span>
+                            <span>الاتصال بالخادم...</span>
+                        </div>
+                        <div class="step" id="step2">
+                            <span class="step-icon">📥</span>
+                            <span>تحميل البيانات...</span>
+                        </div>
+                        <div class="step" id="step3">
+                            <span class="step-icon">🔍</span>
+                            <span>معالجة الملف...</span>
+                        </div>
+                        <div class="step" id="step4">
+                            <span class="step-icon">✅</span>
+                            <span>إعداد الواجهة...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="error-message" id="errorMessage">
+                <p>حدث خطأ في تحميل الملف. يرجى التأكد من صلاحيات الوصول إلى الملف.</p>
+                <button class="retry-btn" onclick="loadGoogleSheet()">إعادة المحاولة</button>
+            </div>
+            <section class="upload-section" id="uploadSection">
+                <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+                    <div class="upload-icon">📊</div>
+                    <div class="upload-text">اختر ملف الإكسل</div>
+                    <div class="upload-subtext">أو اسحب وأفلت الملف هنا</div>
+                </div>
+                <input type="file" id="fileInput" accept=".xlsx,.xls" />
+            </section>
+        </div>
+    </div>
+    
+    <!-- Offline Indicator -->
+    <div class="offline-indicator" id="offlineIndicator">
+        <span class="offline-icon">📵</span>
+        <span>وضع عدم الاتصال</span>
+    </div>
+    
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle-btn" id="themeToggleBtn">
+        <span class="theme-icon" id="themeIcon">🌙</span>
+        <span id="themeText">الوضع النهاري</span>
+    </button>
+    
+    <!-- Designer Button -->
+    <button class="designer-btn" id="designerBtn">
+        <span class="designer-icon">👨‍💻</span>
+        <span>عن المصمم</span>
+    </button>
+    
+    <!-- Designer Modal -->
+    <div class="designer-modal" id="designerModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose">×</button>
+            <div class="modal-header">
+                <div class="modal-icon">👨‍💻</div>
+                <h2>صمم من قبل</h2>
+            </div>
+            <div class="modal-body">
+                <div class="designer-info">
+                    <h3>م. صبحي فاخوري</h3>
+                    <p>مهندس ميكاترونكس</p>
+                </div>
+                <div class="contact-info">
+                    <p>للتواصل والاستفسارات:</p>
+                    <a href="tel:+963995248838" class="phone-link">
+                        <span class="phone-icon">📱</span>
+                        <span>+963 995 248 838</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Full Screen Sheet View -->
+    <div class="sheet-view" id="sheetView">
+        <div class="sheet-header">
+            <button class="back-btn" onclick="closeSheetView()">
+                <span>←</span>
+                <span>رجوع</span>
+            </button>
+            <div class="sheet-title" id="sheetTitle"></div>
+            <div></div>
+        </div>
+        <div class="sheet-content">
+            <div class="table-container">
+                <table class="excel-table" id="excelTable"></table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Update Overlay -->
+    <div class="update-overlay" id="updateOverlay">
+        <div class="update-content">
+            <div class="update-spinner"></div>
+            <div class="update-text">جاري تحديث البيانات...</div>
+        </div>
+    </div>
+    
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+    <script>
+let workbook = null;
+let currentSheetIndex = 0;
+let frozenColumns = 0;
+let pivotTables = {};
+let autoRefreshInterval = null;
+let lastRefreshTime = null;
+let previousData = null;
+let progressInterval = null;
+
+// Local storage keys
+const LOCAL_STORAGE_KEY = 'qablawi_app_data';
+const LOCAL_STORAGE_TIMESTAMP_KEY = 'qablawi_app_timestamp';
+
+// Google Sheet ID
+const GOOGLE_SHEET_ID = "1Uz4oQrylYb-JTehvdKSaXKn8edL7R3k5";
+const GOOGLE_SHEET_DIRECT = `https://docs.google.com/spreadsheets/d/${GOOGLE_SHEET_ID}/export?format=xlsx`;
+
+// ============================================================
+// قم بنسخ رابط Google Apps Script هنا بعد نشره
+// اتبع التعليمات في الملف المرفق لتشغيله
+// ============================================================
+const APPS_SCRIPT_URL = '';
+
+// Smart fetch: tries Apps Script proxy first, then CORS proxies
+function fetchSheetData() {
+    return new Promise((resolve, reject) => {
+        // Strategy 1: Google Apps Script (most reliable from file://)
+        if (APPS_SCRIPT_URL) {
+            fetch(APPS_SCRIPT_URL)
+                .then(r => r.json())
+                .then(json => {
+                    if (json.status === 'ok' && json.data) {
+                        const binary = atob(json.data);
+                        const bytes = new Uint8Array(binary.length);
+                        for (let i = 0; i < binary.length; i++) {
+                            bytes[i] = binary.charCodeAt(i);
+                        }
+                        resolve(bytes);
+                    } else {
+                        throw new Error(json.message || 'فشل تحميل البيانات');
+                    }
+                })
+                .catch(err => {
+                    console.warn('Apps Script failed, trying proxies:', err);
+                    tryCorsProxies(resolve, reject);
+                });
+        } else {
+            tryCorsProxies(resolve, reject);
+        }
+    });
+}
+
+function tryCorsProxies(resolve, reject) {
+    const proxies = [
+        url => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
+        url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
+        url => url
+    ];
+    
+    let i = 0;
+    function tryNext() {
+        if (i >= proxies.length) {
+            reject(new Error('فشل الاتصال'));
+            return;
+        }
+        fetch(proxies[i](GOOGLE_SHEET_DIRECT), { mode: 'cors' })
+            .then(r => {
+                if (!r.ok) throw new Error('HTTP ' + r.status);
+                return r.arrayBuffer();
+            })
+            .then(buf => resolve(new Uint8Array(buf)))
+            .catch(() => { i++; tryNext(); });
+    }
+    tryNext();
+}
+const AUTO_REFRESH_INTERVAL = 30000; // 30 seconds
+
+// Function to save data locally
+function saveDataLocally(workbookData) {
+    try {
+        // Convert workbook data to JSON format
+        const workbookJson = {
+            SheetNames: workbookData.SheetNames,
+            Sheets: {}
+        };
+        
+        // Convert each worksheet to a simple format
+        for (const sheetName of workbookData.SheetNames) {
+            const worksheet = workbookData.Sheets[sheetName];
+            workbookJson.Sheets[sheetName] = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+        }
+        
+        // Save data and timestamp to local storage
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(workbookJson));
+        localStorage.setItem(LOCAL_STORAGE_TIMESTAMP_KEY, Date.now().toString());
+        
+        console.log('Data saved locally successfully');
+        return true;
+    } catch (error) {
+        console.error('Error saving data locally:', error);
+        return false;
+    }
+}
+
+// Function to load data from local storage
+function loadDataLocally() {
+    try {
+        const storedData = localStorage.getItem(LOCAL_STORAGE_KEY);
+        const storedTimestamp = localStorage.getItem(LOCAL_STORAGE_TIMESTAMP_KEY);
+        
+        if (!storedData || !storedTimestamp) {
+            return null;
+        }
+        
+        // Parse stored data
+        const workbookJson = JSON.parse(storedData);
+        const timestamp = parseInt(storedTimestamp);
+        
+        // Rebuild workbook
+        const newWorkbook = XLSX.utils.book_new();
+        
+        for (const sheetName of workbookJson.SheetNames) {
+            const sheetData = workbookJson.Sheets[sheetName];
+            const worksheet = XLSX.utils.aoa_to_sheet(sheetData);
+            XLSX.utils.book_append_sheet(newWorkbook, worksheet, sheetName);
+        }
+        
+        // Calculate time elapsed since last update
+        const lastUpdate = new Date(timestamp);
+        const now = new Date();
+        const diffHours = Math.floor((now - lastUpdate) / (1000 * 60 * 60));
+        
+        return {
+            workbook: newWorkbook,
+            lastUpdate: lastUpdate,
+            diffHours: diffHours
+        };
+    } catch (error) {
+        console.error('Error loading local data:', error);
+        return null;
+    }
+}
+
+// Function to check internet connection
+function checkInternetConnection() {
+    return navigator.onLine;
+}
+
+// Load Google Sheet on page load
+window.onload = function() {
+    // Register Service Worker (only on http/https, not file://)
+    if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+        navigator.serviceWorker.register('sw.js').then(reg => {
+            console.log('Service Worker registered:', reg.scope);
+        }).catch(err => {
+            console.log('Service Worker registration failed:', err);
+        });
+    }
+
+    loadGoogleSheet();
+    initDesignerModal();
+    initThemeToggle();
+    tryLoadCompanyLogo();
+    
+    // Add event listeners for online/offline status
+    window.addEventListener('online', () => {
+        document.getElementById('offlineIndicator').classList.remove('show');
+        showToast('تم استعادة الاتصال بالإنترنت', 'success');
+        // Retry loading data from internet
+        loadGoogleSheet();
+    });
+    
+    window.addEventListener('offline', () => {
+        document.getElementById('offlineIndicator').classList.add('show');
+        showToast('فقدان الاتصال بالإنترنت', 'error');
+    });
+};
+
+// Function to toggle sidebar
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('mainContent');
+    
+    if (sidebar.classList.contains('hidden')) {
+        // Open sidebar
+        sidebar.classList.remove('hidden');
+        sidebar.classList.add('visible');
+        mainContent.classList.add('sidebar-open');
+        sidebar.style.display = 'flex';
+    } else {
+        // Close sidebar
+        sidebar.classList.remove('visible');
+        sidebar.classList.add('hidden');
+        mainContent.classList.remove('sidebar-open');
+        setTimeout(() => {
+            if (sidebar.classList.contains('hidden')) {
+                sidebar.style.display = 'none';
+            }
+        }, 300); // Wait for transition to complete
+    }
+}
+
+function initThemeToggle() {
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    const themeText = document.getElementById('themeText');
+    
+    // Load saved theme preference
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    if (savedTheme === 'light') {
+        document.body.classList.add('light-theme');
+        themeIcon.textContent = '☀️';
+        themeText.textContent = 'الوضع الليلي';
+    }
+    
+    themeToggleBtn.addEventListener('click', function() {
+        const isLightTheme = document.body.classList.toggle('light-theme');
+        
+        if (isLightTheme) {
+            themeIcon.textContent = '☀️';
+            themeText.textContent = 'الوضع الليلي';
+            localStorage.setItem('theme', 'light');
+            showToast('تم التبديل إلى الوضع النهاري', 'info');
+        } else {
+            themeIcon.textContent = '🌙';
+            themeText.textContent = 'الوضع النهاري';
+            localStorage.setItem('theme', 'dark');
+            showToast('تم التبديل إلى الوضع الليلي', 'info');
+        }
+    });
+}
+
+function tryLoadCompanyLogo() {
+    const logoDiv = document.getElementById('companyLogo');
+    const img = new Image();
+    
+    // Try multiple URL formats for Google Drive image
+    const urls = [
+        'https://drive.google.com/uc?export=view&id=1nQDXKUHI_DkRsqkhvtlj4YYcLWErJclQ',
+        'https://drive.google.com/thumbnail?id=1nQDXKUHI_DkRsqkhvtlj4YYcLWErJclQ&sz=w120-h120',
+        'https://lh3.googleusercontent.com/d/1nQDXKUHI_DkRsqkhvtlj4YYcLWErJclQ=w120-h120'
+    ];
+    
+    let currentIndex = 0;
+    
+    function tryNextUrl() {
+        if (currentIndex >= urls.length) {
+            // All URLs failed, keep the fallback
+            return;
+        }
+        
+        img.src = urls[currentIndex];
+    }
+    
+    img.onload = function() {
+        logoDiv.innerHTML = '';
+        logoDiv.appendChild(img);
+        logoDiv.classList.remove('fallback');
+    };
+    
+    img.onerror = function() {
+        currentIndex++;
+        tryNextUrl();
+    };
+    
+    // Start trying URLs
+    tryNextUrl();
+}
+
+function updateProgress(percent, step = null) {
+    const progressBar = document.getElementById('progressBar');
+    const progressText = document.getElementById('progressText');
+    
+    progressBar.style.width = percent + '%';
+    progressText.textContent = Math.round(percent) + '%';
+    
+    // Update step indicators
+    if (step) {
+        for (let i = 1; i <= 4; i++) {
+            const stepElement = document.getElementById(`step${i}`);
+            if (i < step) {
+                stepElement.classList.add('completed');
+                stepElement.classList.remove('active');
+            } else if (i === step) {
+                stepElement.classList.add('active');
+                stepElement.classList.remove('completed');
+            } else {
+                stepElement.classList.remove('active', 'completed');
+            }
+        }
+    }
+}
+
+function startProgressSimulation() {
+    let progress = 0;
+    let currentStep = 1;
+    
+    // Reset progress
+    updateProgress(0, 1);
+    
+    progressInterval = setInterval(() => {
+        progress += Math.random() * 25; // Increased increment for faster progress
+        progress = Math.min(progress, 100);
+        
+        // Update step based on progress
+        if (progress >= 75 && currentStep < 4) {
+            currentStep = 4;
+            updateProgress(progress, currentStep);
+        } else if (progress >= 50 && currentStep < 3) {
+            currentStep = 3;
+            updateProgress(progress, currentStep);
+        } else if (progress >= 25 && currentStep < 2) {
+            currentStep = 2;
+            updateProgress(progress, currentStep);
+        } else {
+            updateProgress(progress, currentStep);
+        }
+        
+        if (progress >= 100) {
+            clearInterval(progressInterval);
+        }
+    }, 100); // Reduced interval time for faster updates
+}
+
+function stopProgressSimulation() {
+    if (progressInterval) {
+        clearInterval(progressInterval);
+        progressInterval = null;
+    }
+    updateProgress(100, 4);
+}
+
+function loadGoogleSheet() {
+    // Check if there's an internet connection
+    if (!checkInternetConnection()) {
+        // Try to load data from local storage
+        const localData = loadDataLocally();
+        
+        if (localData) {
+            // Show message to user
+            showToast(`لا يوجد اتصال بالإنترنت. تم عرض آخر تحديث محلي (منذ ${localData.diffHours} ساعة)`, 'info');
+            
+            // Use local data
+            workbook = localData.workbook;
+            previousData = {
+                sheets: workbook.SheetNames.length,
+                sheetNames: [...workbook.SheetNames]
+            };
+            
+            // Create sheet buttons
+            createSheetButtons(workbook.SheetNames);
+            
+            // Show sidebar as hidden by default
+            const sidebar = document.getElementById('sidebar');
+            sidebar.style.display = 'none';
+            sidebar.classList.add('hidden');
+            
+            // Update last refresh time
+            lastRefreshTime = localData.lastUpdate;
+            updateLastRefreshTime();
+            
+            // Stop auto refresh
+            if (autoRefreshInterval) {
+                clearInterval(autoRefreshInterval);
+                autoRefreshInterval = null;
+            }
+            
+            // Change auto refresh indicator status
+            document.getElementById('autoRefreshIndicator').style.background = '#888';
+            
+            // Show message that app is ready
+            setTimeout(() => {
+                showToast('تم تحميل البيانات المحلية، اضغط على الشعار لفتح القائمة', 'success');
+            }, 300);
+            
+            return;
+        } else {
+            // No local data available
+            document.getElementById('loading').style.display = 'none';
+            showToast('لا يوجد اتصال بالإنترنت ولا توجد بيانات محلية', 'error');
+            document.getElementById('uploadSection').style.display = 'block';
+            return;
+        }
+    }
+    
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('errorMessage').style.display = 'none';
+    document.getElementById('uploadSection').style.display = 'none';
+    
+    // Start progress simulation
+    startProgressSimulation();
+    
+    // Set a timeout to ensure loading doesn't take too long
+    const loadingTimeout = setTimeout(() => {
+        stopProgressSimulation();
+        document.getElementById('loading').style.display = 'none';
+        showToast('تم إعداد الواجهة بنجاح', 'success');
+    }, 15000); // 15 seconds max loading time
+    
+    fetchSheetData()
+        .then(data => {
+            clearTimeout(loadingTimeout);
+            
+            try {
+                // Update progress to 75% when data is loaded
+                updateProgress(75, 3);
+                
+                // Process workbook with performance optimizations
+                const startTime = performance.now();
+                
+                // Use optimized options for faster processing
+                workbook = XLSX.read(data, {
+                    type: 'array',
+                    cellStyles: false, // Skip cell styles for faster processing
+                    cellNF: false, // Skip number formats
+                    raw: true // Use raw values
+                });
+                
+                const processingTime = performance.now() - startTime;
+                console.log(`Workbook processed in ${processingTime.toFixed(2)}ms`);
+                
+                // Update progress to 90% when workbook is read
+                updateProgress(90, 4);
+                
+                // Store previous data for comparison (simplified)
+                previousData = {
+                    sheets: workbook.SheetNames.length,
+                    sheetNames: [...workbook.SheetNames]
+                };
+                
+                // Save data locally
+                saveDataLocally(workbook);
+                
+                
+                
+                // Create sheet buttons
+                createSheetButtons(workbook.SheetNames);
+                
+                // Show sidebar as hidden by default
+                const sidebar = document.getElementById('sidebar');
+                sidebar.style.display = 'none';
+                sidebar.classList.add('hidden');
+                
+                document.getElementById('loading').style.display = 'none';
+                
+                // Stop progress simulation
+                stopProgressSimulation();
+                
+                // Update last refresh time
+                updateLastRefreshTime();
+                
+                // Start auto refresh
+                startAutoRefresh();
+                
+                // Show notification that app is ready
+                setTimeout(() => {
+                    showToast('تم تحميل التطبيق بنجاح، اضغط على الشعار لفتح القائمة', 'success');
+                }, 300);
+            } catch (error) {
+                console.error('Error processing file:', error);
+                stopProgressSimulation();
+                showError();
+            }
+        })
+        .catch(error => {
+            clearTimeout(loadingTimeout);
+            console.error('Error loading Google Sheet:', error);
+            showToast('خطأ في جلب البيانات: ' + error.message, 'error');
+            stopProgressSimulation();
+            
+            // Try to load data from local storage when internet connection fails
+            const localData = loadDataLocally();
+            
+            if (localData) {
+                showToast('فشل الاتصال بالإنترنت. تم عرض آخر تحديث محلي', 'info');
+                
+                // Use local data
+                workbook = localData.workbook;
+                previousData = {
+                    sheets: workbook.SheetNames.length,
+                    sheetNames: [...workbook.SheetNames]
+                };
+                
+                
+                
+                // Create sheet buttons
+                createSheetButtons(workbook.SheetNames);
+                
+                // Show sidebar as hidden by default
+                const sidebar = document.getElementById('sidebar');
+                sidebar.style.display = 'none';
+                sidebar.classList.add('hidden');
+                
+                // Update last refresh time
+                lastRefreshTime = localData.lastUpdate;
+                updateLastRefreshTime();
+                
+                // Stop auto refresh
+                if (autoRefreshInterval) {
+                    clearInterval(autoRefreshInterval);
+                    autoRefreshInterval = null;
+                }
+                
+                // Change auto refresh indicator status
+                document.getElementById('autoRefreshIndicator').style.background = '#888';
+                
+                // Show message that app is ready
+                setTimeout(() => {
+                    showToast('تم تحميل البيانات المحلية، اضغط على الشعار لفتح القائمة', 'success');
+                }, 300);
+            } else {
+                showError();
+            }
+        });
+}
+
+function startAutoRefresh() {
+    // Clear existing interval
+    if (autoRefreshInterval) {
+        clearInterval(autoRefreshInterval);
+    }
+    
+    // Start new interval
+    autoRefreshInterval = setInterval(() => {
+        autoRefreshData();
+    }, AUTO_REFRESH_INTERVAL);
+    
+    // Update indicator
+    const indicator = document.getElementById('autoRefreshIndicator');
+    indicator.classList.remove('updating');
+}
+
+function autoRefreshData() {
+    const indicator = document.getElementById('autoRefreshIndicator');
+    indicator.classList.add('updating');
+    
+    fetchSheetData()
+        .then(data => {
+            try {
+                const newWorkbook = XLSX.read(data, {
+                    type: 'array',
+                    cellStyles: false,
+                    cellNF: false,
+                    raw: true
+                });
+                
+                // Simple change detection
+                const hasChanges = newWorkbook.SheetNames.length !== (previousData?.sheets || 0);
+                
+                if (hasChanges) {
+                    // Update workbook
+                    workbook = newWorkbook;
+                    previousData = {
+                        sheets: workbook.SheetNames.length,
+                        sheetNames: [...workbook.SheetNames]
+                    };
+                    
+                    // Save data locally
+                    saveDataLocally(workbook);
+                    
+                    
+                    // Update sheet buttons if needed
+                    createSheetButtons(workbook.SheetNames);
+                    
+                    // Update current sheet if open
+                    if (document.getElementById('sheetView').style.display === 'block') {
+                        openSheetView(currentSheetIndex);
+                    }
+                    
+                    // Update last refresh time
+                    updateLastRefreshTime();
+                    
+                    // Show notification
+                    showToast('تم تحديث البيانات', 'success');
+                }
+            } catch (error) {
+                console.error('Error processing file:', error);
+            }
+        })
+        .catch(error => {
+            console.error('Error auto refreshing data:', error);
+        })
+        .finally(() => {
+            indicator.classList.remove('updating');
+        });
+}
+
+// Extract names function removed - search feature disabled
+
+function updateLastRefreshTime() {
+    const now = new Date();
+    lastRefreshTime = now;
+    const timeString = now.toLocaleTimeString('ar-SA', {
+        hour: '2-digit',
+        minute: '2-digit'
+    });
+    document.getElementById('lastUpdate').textContent = `آخر تحديث: ${timeString}`;
+}
+
+function showError() {
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('errorMessage').style.display = 'block';
+    document.getElementById('uploadSection').style.display = 'block';
+}
+
+// File input handler (for local files)
+document.getElementById('fileInput').addEventListener('change', handleFile);
+
+// Drag and drop handlers
+const uploadArea = document.querySelector('.upload-area');
+
+uploadArea.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    uploadArea.style.borderColor = '#FFA500';
+    uploadArea.style.background = 'rgba(255, 255, 255, 0.2)';
+});
+
+uploadArea.addEventListener('dragleave', (e) => {
+    e.preventDefault();
+    uploadArea.style.borderColor = '#FFD700';
+    uploadArea.style.background = 'rgba(255, 255, 255, 0.1)';
+});
+
+uploadArea.addEventListener('drop', (e) => {
+    e.preventDefault();
+    uploadArea.style.borderColor = '#FFD700';
+    uploadArea.style.background = 'rgba(255, 255, 255, 0.1)';
+    
+    const files = e.dataTransfer.files;
+    if (files.length > 0 && (files[0].name.endsWith('.xlsx') || files[0].name.endsWith('.xls'))) {
+        handleFileUpload(files[0]);
+    }
+});
+
+function handleFile(e) {
+    const file = e.target.files[0];
+    if (file) {
+        handleFileUpload(file);
+    }
+}
+
+function handleFileUpload(file) {
+    document.getElementById('loading').style.display = 'block';
+    document.getElementById('uploadSection').style.display = 'none';
+    document.getElementById('errorMessage').style.display = 'none';
+    
+    // Start progress simulation for file upload
+    startProgressSimulation();
+    
+    // Set a timeout to ensure loading doesn't take too long
+    const loadingTimeout = setTimeout(() => {
+        stopProgressSimulation();
+        document.getElementById('loading').style.display = 'none';
+        showToast('تم تحميل الملف بنجاح', 'success');
+    }, 15000); // 15 seconds max loading time
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        clearTimeout(loadingTimeout);
+        
+        try {
+            // Update progress to 50% when file is loaded
+            updateProgress(50, 2);
+            
+            const data = new Uint8Array(e.target.result);
+            
+            // Process workbook with performance optimizations
+            const startTime = performance.now();
+            
+            workbook = XLSX.read(data, {
+                type: 'array',
+                cellStyles: false, // Skip cell styles for faster processing
+                cellNF: false, // Skip number formats
+                raw: true // Use raw values
+            });
+            
+            const processingTime = performance.now() - startTime;
+            console.log(`Workbook processed in ${processingTime.toFixed(2)}ms`);
+            
+            // Update progress to 75% when workbook is read
+            updateProgress(75, 3);
+            
+            // Store previous data for comparison (simplified)
+            previousData = {
+                sheets: workbook.SheetNames.length,
+                sheetNames: [...workbook.SheetNames]
+            };
+            
+            // Save data locally
+            saveDataLocally(workbook);
+            
+            
+            // Create sheet buttons
+            createSheetButtons(workbook.SheetNames);
+            
+            // Show sidebar as hidden by default
+            const sidebar = document.getElementById('sidebar');
+            sidebar.style.display = 'none';
+            sidebar.classList.add('hidden');
+            
+            document.getElementById('loading').style.display = 'none';
+            
+            // Stop progress simulation
+            stopProgressSimulation();
+            
+            // Update last refresh time
+            updateLastRefreshTime();
+            
+            // Stop auto refresh for local files
+            if (autoRefreshInterval) {
+                clearInterval(autoRefreshInterval);
+                autoRefreshInterval = null;
+                document.getElementById('autoRefreshIndicator').style.background = '#888';
+            }
+            
+            // Show notification that app is ready
+            setTimeout(() => {
+                showToast('تم تحميل الملف بنجاح، اضغط على الشعار لفتح القائمة', 'success');
+            }, 300);
+        } catch (error) {
+            console.error('Error reading file:', error);
+            stopProgressSimulation();
+            alert('حدث خطأ في قراءة الملف. يرجى التأكد من أن الملف صالح.');
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('uploadSection').style.display = 'block';
+        }
+    };
+    reader.readAsArrayBuffer(file);
+}
+
+function createSheetButtons(sheetNames) {
+    const sheetButtons = document.getElementById('sheetButtons');
+    sheetButtons.innerHTML = '';
+    
+    sheetNames.forEach((name, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'sheet-btn';
+        if (index === currentSheetIndex) {
+            btn.classList.add('active');
+        }
+        btn.textContent = name;
+        btn.onclick = () => openSheetView(index);
+        sheetButtons.appendChild(btn);
+    });
+}
+
+function openSheetView(sheetIndex) {
+    // --- NEW: Add fullscreen class ---
+    document.body.classList.add('fullscreen-mode');
+
+    currentSheetIndex = sheetIndex;
+    const sheetName = workbook.SheetNames[sheetIndex];
+    const worksheet = workbook.Sheets[sheetName];
+    
+    // Set sheet title
+    document.getElementById('sheetTitle').textContent = sheetName;
+    
+    // Show sheet view
+    document.getElementById('sheetView').style.display = 'block';
+    
+    // Create table with merged cells support
+    const tableContainer = document.getElementById('sheetView').querySelector('.table-container');
+    const table = document.getElementById('excelTable');
+    table.innerHTML = '';
+    
+    // Get the range of the worksheet
+    const range = XLSX.utils.decode_range(worksheet['!ref']);
+    const merges = worksheet['!merges'] || [];
+    
+    // Create a 2D array to track merged cells
+    const mergedMap = Array(range.e.r - range.s.r + 1).fill(null).map(() => 
+        Array(range.e.c - range.s.c + 1).fill(false)
+    );
+    
+    // Mark merged cells
+    merges.forEach(merge => {
+        for (let r = merge.s.r; r <= merge.e.r; r++) {
+            for (let c = merge.s.c; c <= merge.e.c; c++) {
+                mergedMap[r - range.s.r][c - range.s.c] = true;
+            }
+        }
+    });
+    
+    // --- بداية التعديلات الجديدة ---
+    
+    // Determine if rounding should be applied
+    const shouldRound = !(
+        sheetName.trim() === 'تصريف الايصالات الاسبوعي' || 
+        sheetName.trim() === 'دفتر الايصالات السنوي'
+    );
+    
+    // Find date columns (columns where the first cell contains 'تاريخ' or 'التاريخ')
+    const dateColumns = new Set();
+    const headerRow = range.s.r;
+    for (let C = range.s.c; C <= range.e.c; C++) {
+        const cellAddress = XLSX.utils.encode_cell({r: headerRow, c: C});
+        const cell = worksheet[cellAddress];
+        if (cell && cell.v && typeof cell.v === 'string') {
+            const headerValue = cell.v.toString().toLowerCase();
+            if (headerValue.includes('تاريخ')) {
+                dateColumns.add(C);
+            }
+        }
+    }
+    
+    // --- نهاية التعديلات الجديدة ---
+    
+    // Build table HTML with merged cells and new logic
+    let html = '';
+    for (let R = range.s.r; R <= range.e.r; R++) {
+        html += '<tr>';
+        for (let C = range.s.c; C <= range.e.c; C++) {
+            // Skip if this cell is part of a merge but not the top-left cell
+            if (mergedMap[R - range.s.r][C - range.s.c]) {
+                // Check if this is the top-left cell of a merge
+                const merge = merges.find(m => 
+                    m.s.r === R && m.s.c === C
+                );
+                
+                if (merge) {
+                    // This is the top-left cell, add rowspan and colspan
+                    const cellAddress = XLSX.utils.encode_cell({r: R, c: C});
+                    const cell = worksheet[cellAddress];
+                    let cellValue = cell ? (cell.v || '') : '';
+    
+                    // --- بداية التعديلات الجديدة ---
+                    
+                    // Apply formatting logic
+                    if (R > headerRow) { // Don't format header cells
+                        if (dateColumns.has(C)) {
+                            // If it's a date column, format as date
+                            if (typeof cellValue === 'number') {
+                                // Excel date is a number of days since 1900-01-01
+                                const date = new Date((cellValue - 25569) * 86400 * 1000);
+                                // Format as YYYY-MM-DD or DD/MM/YYYY
+                                cellValue = date.toLocaleDateString('ar-SA');
+                            }
+                        } else if (typeof cellValue === 'number') {
+                            // --- NEW: Apply rounding and thousand separators ---
+                            if (shouldRound) {
+                                cellValue = Math.round(cellValue);
+                            }
+                            // Add thousand separator using Arabic locale
+                            cellValue = cellValue.toLocaleString('ar-SA');
+                        }
+                    }
+                    
+                    // --- نهاية التعديلات الجديدة ---
+    
+                    const rowspan = merge.e.r - merge.s.r + 1;
+                    const colspan = merge.e.c - merge.s.c + 1;
+                    
+                    html += `<td rowspan="${rowspan}" colspan="${colspan}" class="merged-cell">${cellValue}</td>`;
+                }
+                // If not the top-left, skip this cell (it's covered by rowspan/colspan)
+            } else {
+                // Regular cell
+                const cellAddress = XLSX.utils.encode_cell({r: R, c: C});
+                const cell = worksheet[cellAddress];
+                let cellValue = cell ? (cell.v || '') : '';
+    
+                // --- بداية التعديلات الجديدة ---
+    
+                // Apply formatting logic
+                if (R > headerRow) { // Don't format header cells
+                    if (dateColumns.has(C)) {
+                        // If it's a date column, format as date
+                        if (typeof cellValue === 'number') {
+                            // Excel date is a number of days since 1900-01-01
+                            const date = new Date((cellValue - 25569) * 86400 * 1000);
+                            // Format as YYYY-MM-DD or DD/MM/YYYY
+                            cellValue = date.toLocaleDateString('ar-SA');
+                        }
+                    } else if (typeof cellValue === 'number') {
+                        // --- NEW: Apply rounding and thousand separators ---
+                        if (shouldRound) {
+                            cellValue = Math.round(cellValue);
+                        }
+                        // Add thousand separator using Arabic locale
+                        cellValue = cellValue.toLocaleString('ar-SA');
+                    }
+                }
+    
+                // --- نهاية التعديلات الجديدة ---
+    
+                html += `<td>${cellValue}</td>`;
+            }
+        }
+        html += '</tr>';
+    }
+    
+    table.innerHTML = html;
+    
+    // Apply header styling to first row
+    const firstRow = table.querySelector('tr');
+    if (firstRow) {
+        firstRow.querySelectorAll('td').forEach(cell => {
+            cell.tagName = 'TH';
+            cell.outerHTML = cell.outerHTML.replace(/<td/g, '<th').replace(/<\/td>/g, '</th>');
+        });
+    }
+    
+
+}
+
+function closeSheetView() {
+    // --- NEW: Remove fullscreen class ---
+    document.body.classList.remove('fullscreen-mode');
+    document.getElementById('sheetView').style.display = 'none';
+}
+
+// Search filtering functions removed - search feature disabled
+
+function refreshData() {
+    const refreshBtn = document.getElementById('refreshBtn');
+    const updateOverlay = document.getElementById('updateOverlay');
+    
+    // Show loading state
+    refreshBtn.disabled = true;
+    refreshBtn.classList.add('loading');
+    updateOverlay.classList.add('show');
+    
+    fetchSheetData()
+        .then(data => {
+            try {
+                const newWorkbook = XLSX.read(data, {
+                    type: 'array',
+                    cellStyles: false,
+                    cellNF: false,
+                    raw: true
+                });
+                
+                // Simple change detection
+                const hasChanges = newWorkbook.SheetNames.length !== (previousData?.sheets || 0);
+                
+                if (hasChanges) {
+                    // Update workbook
+                    workbook = newWorkbook;
+                    previousData = {
+                        sheets: workbook.SheetNames.length,
+                        sheetNames: [...workbook.SheetNames]
+                    };
+                    
+                    // Save data locally
+                    saveDataLocally(workbook);
+                    
+                    
+                    // Update sheet buttons if needed
+                    createSheetButtons(workbook.SheetNames);
+                    
+                    // Update current sheet if open
+                    if (document.getElementById('sheetView').style.display === 'block') {
+                        openSheetView(currentSheetIndex);
+                    }
+                    
+                    // Update last refresh time
+                    updateLastRefreshTime();
+                    
+                    // Show notification
+                    showToast('تم تحديث البيانات', 'success');
+                } else {
+                    showToast('البيانات محدثة بالفعل', 'info');
+                }
+            } catch (error) {
+                console.error('Error processing file:', error);
+                showToast('حدث خطأ في تحديث البيانات', 'error');
+            }
+        })
+        .catch(error => {
+            console.error('Error refreshing data:', error);
+            showToast('فشل تحديث البيانات. تحقق من اتصال الإنترنت', 'error');
+        })
+        .finally(() => {
+            // Hide loading state
+            refreshBtn.disabled = false;
+            refreshBtn.classList.remove('loading');
+            updateOverlay.classList.remove('show');
+        });
+}
+
+function showToast(message, type = 'success') {
+    const toast = document.getElementById('toast');
+    toast.textContent = message;
+    toast.className = `toast ${type}`;
+    toast.classList.add('show');
+    
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 3000);
+}
+
+// Initialize Designer Modal
+function initDesignerModal() {
+    const designerBtn = document.getElementById('designerBtn');
+    const designerModal = document.getElementById('designerModal');
+    const modalClose = document.getElementById('modalClose');
+    
+    // Open modal
+    designerBtn.addEventListener('click', function() {
+        designerModal.classList.add('show');
+    });
+    
+    // Close modal
+    modalClose.addEventListener('click', function() {
+        designerModal.classList.remove('show');
+    });
+    
+    // Close when clicking outside modal
+    designerModal.addEventListener('click', function(e) {
+        if (e.target === designerModal) {
+            designerModal.classList.remove('show');
+        }
+    });
+    
+    // Close with ESC key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && designerModal.classList.contains('show')) {
+            designerModal.classList.remove('show');
+        }
+    });
+}
+
+// Search functions removed - search feature disabled
+
+// Cleanup on page unload
+window.addEventListener('beforeunload', () => {
+    if (autoRefreshInterval) {
+        clearInterval(autoRefreshInterval);
+    }
+    if (progressInterval) {
+        clearInterval(progressInterval);
+    }
+});
+
+</script>
+</body>
+</html>
