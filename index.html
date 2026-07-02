@@ -10,7 +10,10 @@
     <link rel="icon" type="image/png" sizes="32x32" href="https://drive.google.com/uc?export=view&id=1nQDXKUHI_DkRsqkhvtlj4YYcLWErJclQ">
     <link rel="icon" type="image/png" sizes="16x16" href="https://drive.google.com/uc?export=view&id=1nQDXKUHI_DkRsqkhvtlj4YYcLWErJclQ">
     <link rel="apple-touch-icon" sizes="180x180" href="https://drive.google.com/uc?export=view&id=1nQDXKUHI_DkRsqkhvtlj4YYcLWErJclQ">
-    
+    <!-- Google Fonts - Cairo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <meta name="msapplication-TileColor" content="#0a1628">
     <meta name="msapplication-config" content="browserconfig.xml">
     <meta name="theme-color" content="#0a1628">
@@ -38,42 +41,19 @@
     --scrollbar-track: #0f2140;
     --glass-bg-dark: rgba(15, 33, 64, 0.75);
     --glass-border-dark: rgba(255, 255, 255, 0.12);
-    --glass-bg-light: rgba(255, 255, 255, 0.7);
-    --glass-border-light: rgba(0, 0, 0, 0.1);
+
     /* Table border colors for dark theme */
     --table-border-dark: #FFD700;
-    --table-border-light: #1e3a6e;
+
     --table-border: var(--table-border-dark);
 }
 
-/* Light Theme Variables - Blue & Gold */
-body.light-theme {
-    --bg-primary: #f0f4fa;
-    --bg-secondary: #e4eaf5;
-    --bg-tertiary: #dce3f0;
-    --bg-quaternary: #d0d9eb;
-    --text-primary: #1a2744;
-    --text-secondary: #3a4d6e;
-    --text-tertiary: #6b82a8;
-    --border-color: #b8c8e0;
-    --accent-primary: #D4A017;
-    --accent-secondary: #C49212;
-    --shadow-color: rgba(20, 40, 80, 0.1);
-    --scrollbar-track: #e4eaf5;
-    --glass-bg-dark: rgba(255, 255, 255, 0.7);
-    --glass-border-dark: rgba(0, 0, 0, 0.1);
-    --glass-bg-light: rgba(255, 255, 255, 0.7);
-    --glass-border-light: rgba(0, 0, 0, 0.1);
-    --table-border: var(--table-border-light);
-}
-
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-primary) 100%);
     color: var(--text-primary);
     min-height: 100vh;
     overflow-x: hidden;
-    transition: all 0.3s ease;
     position: relative;
 }
 
@@ -106,14 +86,8 @@ body::before {
     z-index: -1;
 }
 
-body.light-theme .bg-overlay {
-    background: linear-gradient(135deg, rgba(220, 228, 245, 0.75) 0%, rgba(200, 215, 240, 0.55) 50%, rgba(220, 228, 245, 0.75) 100%);
-}
-
 /* --- Fullscreen Mode Styles --- */
-body.fullscreen-mode .header,
-body.fullscreen-mode .sidebar,
-body.fullscreen-mode .theme-toggle-btn,
+body.fullscreen-mode .landing-container,
 body.fullscreen-mode .designer-btn,
 body.fullscreen-mode .offline-indicator {
     display: none !important;
@@ -130,61 +104,6 @@ body.fullscreen-mode .main-content {
     position: relative;
 }
 
-/* Sidebar - Enhanced Glass Effect */
-.sidebar {
-    width: 250px;
-    background: rgba(10, 22, 40, 0.85);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border-left: 1px solid rgba(255, 215, 0, 0.2);
-    padding: 20px;
-    display: none;
-    flex-direction: column;
-    position: fixed;
-    right: 0;
-    top: 0;
-    height: 100vh;
-    overflow-y: auto;
-    z-index: 100;
-    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
-    transform: translateX(0);
-}
-
-body.light-theme .sidebar {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border-left: 1px solid rgba(0, 0, 0, 0.1);
-    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.1);
-}
-
-.sidebar.hidden {
-    transform: translateX(100%);
-}
-
-.sidebar.visible {
-    transform: translateX(0);
-}
-
-.sidebar-header {
-    text-align: center;
-    margin-bottom: 30px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-body.light-theme .sidebar-header {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-}
-
-.sidebar-header h2 {
-    font-size: 20px;
-    background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
 
 /* Refresh Section - Enhanced Glass Effect */
 .refresh-section {
@@ -270,11 +189,6 @@ body.light-theme .sidebar-header {
     border: 1px solid rgba(255, 215, 0, 0.2);
 }
 
-body.light-theme .auto-refresh-status {
-    background: rgba(255, 215, 0, 0.2);
-    border: 1px solid rgba(255, 215, 0, 0.3);
-}
-
 .auto-refresh-indicator {
     width: 8px;
     height: 8px;
@@ -301,132 +215,12 @@ body.light-theme .auto-refresh-status {
     margin-top: 10px;
 }
 
-/* Sheet Buttons - Enhanced Glass Effect */
-.sheet-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.sheet-btn {
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    color: var(--text-primary);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 15px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 14px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-
-body.light-theme .sheet-btn {
-    background: rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.sheet-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.3), transparent);
-    transition: right 0.5s ease;
-}
-
-.sheet-btn:hover::before {
-    right: 100%;
-}
-
-.sheet-btn:hover {
-    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
-    color: #000;
-    transform: translateX(-5px);
-    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
-}
-
-.sheet-btn.active {
-    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
-    color: #000;
-    font-weight: bold;
-}
-
-.new-data-badge {
-    position: absolute;
-    top: -5px;
-    left: -5px;
-    background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
-    color: white;
-    font-size: 10px;
-    padding: 2px 6px;
-    border-radius: 10px;
-    font-weight: bold;
-    animation: bounce 1s infinite;
-}
-
-@keyframes bounce {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-}
 
 /* Main Content */
 .main-content {
     flex: 1;
     padding: 20px;
     transition: margin-right 0.3s ease;
-}
-
-.main-content.sidebar-open {
-    margin-right: 250px;
-}
-
-/* Header - Enhanced Glass Effect */
-.header {
-    background: rgba(10, 22, 40, 0.85);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    padding: 20px;
-    text-align: center;
-    border-bottom: 2px solid var(--accent-primary);
-    box-shadow: 0 2px 20px rgba(255, 215, 0, 0.3);
-    margin-bottom: 30px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-body.light-theme .header {
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-/* Company Logo - Clickable */
-.company-logo {
-    width: 120px;
-    height: 120px;
-    margin-bottom: 15px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid var(--accent-primary);
-    box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3);
-    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 48px;
-    color: #000;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
 }
 
 .company-logo:hover {
@@ -465,6 +259,348 @@ body.light-theme .header {
     font-size: 16px;
 }
 
+
+
+/* ===== NEW CENTERED LAYOUT ===== */
+
+/* Landing Container - Full Screen Centered */
+.landing-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 40px);
+    padding: 20px;
+    position: relative;
+}
+
+/* Header - Minimal Glass Container for Logo */
+.header {
+    background: rgba(10, 22, 40, 0.4);
+    backdrop-filter: blur(25px) saturate(180%);
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    border: 1px solid rgba(255, 215, 0, 0.15);
+    border-radius: 24px;
+    padding: 40px 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: default;
+    box-shadow: 
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 0 0 1px rgba(255, 215, 0, 0.05);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header:hover {
+    box-shadow: 
+        0 12px 48px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        0 0 40px rgba(255, 215, 0, 0.08);
+    border-color: rgba(255, 215, 0, 0.25);
+}
+
+/* Company Logo - Centered, Larger, Luxurious */
+.company-logo {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--accent-primary);
+    box-shadow: 
+        0 0 30px rgba(255, 215, 0, 0.3),
+        0 0 60px rgba(255, 215, 0, 0.1);
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 52px;
+    font-family: 'Cairo', sans-serif;
+    color: #000;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 2;
+}
+
+.company-logo::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 215, 0, 0.2);
+    animation: logoPulse 3s ease-in-out infinite;
+}
+
+@keyframes logoPulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.08); opacity: 1; }
+}
+
+.company-logo:hover {
+    transform: scale(1.08);
+    box-shadow: 
+        0 0 40px rgba(255, 215, 0, 0.5),
+        0 0 80px rgba(255, 215, 0, 0.15);
+}
+
+.company-logo:active {
+    transform: scale(0.95);
+}
+
+.company-logo.fallback {
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 52px;
+    font-family: 'Cairo', sans-serif;
+    color: #000;
+    font-weight: 800;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    z-index: 2;
+}
+
+.company-logo.fallback::after {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 215, 0, 0.2);
+    animation: logoPulse 3s ease-in-out infinite;
+}
+
+.company-logo.fallback:hover {
+    transform: scale(1.08);
+    box-shadow: 
+        0 0 40px rgba(255, 215, 0, 0.5),
+        0 0 80px rgba(255, 215, 0, 0.15);
+}
+
+.header h1 {
+    font-size: 32px;
+    font-family: 'Cairo', sans-serif;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent-primary), #fff, var(--accent-secondary));
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: titleShimmer 4s ease-in-out infinite;
+    margin-top: 20px;
+    margin-bottom: 8px;
+}
+
+@keyframes titleShimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.header p {
+    color: var(--text-tertiary);
+    font-size: 14px;
+    font-family: 'Cairo', sans-serif;
+    margin-bottom: 0;
+}
+
+/* Navigation Buttons Container - Below Logo */
+.nav-buttons-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                opacity 0.4s ease,
+                margin-top 0.4s ease;
+    opacity: 0;
+    margin-top: 0;
+    width: 100%;
+    max-width: 350px;
+}
+
+.nav-buttons-container.show {
+    max-height: 500px;
+    opacity: 1;
+    margin-top: 25px;
+}
+
+/* Navigation Buttons - Luxurious Glass */
+.nav-sheet-btn {
+    width: 100%;
+    padding: 16px 24px;
+    margin-bottom: 12px;
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    color: var(--text-primary);
+    font-family: 'Cairo', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    box-shadow: 
+        0 4px 16px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.nav-sheet-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+    transition: right 0.6s ease;
+}
+
+.nav-sheet-btn:hover::before {
+    right: 100%;
+}
+
+.nav-sheet-btn:hover {
+    background: rgba(255, 215, 0, 0.12);
+    border-color: rgba(255, 215, 0, 0.35);
+    box-shadow: 
+        0 8px 32px rgba(255, 215, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    transform: translateY(-3px);
+    color: var(--accent-primary);
+}
+
+.nav-sheet-btn:active {
+    transform: translateY(-1px) scale(0.98);
+}
+
+.nav-sheet-btn.active {
+    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 193, 7, 0.15) 100%);
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+    box-shadow: 
+        0 4px 20px rgba(255, 215, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Refresh button inside nav */
+.nav-refresh-btn {
+    width: 100%;
+    padding: 14px 24px;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    border: none;
+    border-radius: 16px;
+    color: #000;
+    font-family: 'Cairo', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-refresh-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: right 0.6s ease;
+}
+
+.nav-refresh-btn:hover::before {
+    right: 100%;
+}
+
+.nav-refresh-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(255, 215, 0, 0.4);
+}
+
+.nav-refresh-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.nav-refresh-btn.loading .refresh-icon {
+    animation: spin 1s linear infinite;
+}
+
+/* Auto refresh status in nav */
+.nav-refresh-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    padding: 10px;
+    background: rgba(255, 215, 0, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 12px;
+    font-size: 12px;
+    font-family: 'Cairo', sans-serif;
+    color: var(--text-tertiary);
+    border: 1px solid rgba(255, 215, 0, 0.12);
+}
+
+.nav-last-update {
+    text-align: center;
+    font-size: 11px;
+    font-family: 'Cairo', sans-serif;
+    color: var(--text-tertiary);
+    margin-top: 8px;
+    margin-bottom: 8px;
+    opacity: 0.7;
+}
+
+/* Click hint */
+.click-hint {
+    color: var(--text-tertiary);
+    font-size: 13px;
+    font-family: 'Cairo', sans-serif;
+    margin-top: 15px;
+    opacity: 0.6;
+    animation: hintBlink 2.5s ease-in-out infinite;
+    transition: opacity 0.3s ease;
+}
+
+.click-hint.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+@keyframes hintBlink {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+}
+
+
+
+/* Sheet buttons container inside nav */
+#sheetButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
 /* Loading Animation with Progress Bar - Enhanced Glass Effect */
 .loading {
     display: block;
@@ -485,11 +621,6 @@ body.light-theme .header {
     max-width: 500px;
     margin: 0 auto;
     border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-body.light-theme .loading-content {
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .loading-spinner {
@@ -609,11 +740,6 @@ body.light-theme .loading-content {
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-body.light-theme .sheet-header {
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(0, 0, 0, 0.1);
-}
-
 .sheet-header::before {
     content: '';
     width: 30px;
@@ -674,7 +800,8 @@ body.light-theme .sheet-header {
     border-spacing: 0;
     background: var(--bg-primary);
     color: var(--text-primary);
-    font-size: 12px;
+    font-family: 'Cairo', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 13px;
     overflow: hidden;
     /* Outer border and radius removed */
     table-layout: auto; /* Allow columns to auto-size */
@@ -715,10 +842,6 @@ body.light-theme .sheet-header {
     background-color: var(--bg-primary);
 }
 
-body.light-theme .excel-table td {
-    background-color: var(--bg-primary);
-}
-
 /* Enhanced hover effects */
 .excel-table tr:hover td {
     background-color: rgba(255, 215, 0, 0.15);
@@ -726,22 +849,6 @@ body.light-theme .excel-table td {
     box-shadow: 
         inset 0 0 0 1px rgba(255, 215, 0, 0.3),
         0 0 8px rgba(255, 215, 0, 0.2);
-}
-
-/* Enhanced light theme borders */
-body.light-theme .excel-table th,
-body.light-theme .excel-table td {
-    border-color: var(--table-border-light);
-}
-
-body.light-theme .excel-table th {
-    border-color: var(--table-border-light);
-    border-bottom: 2px solid var(--table-border-light); /* Reduced border */
-}
-
-body.light-theme .excel-table tr:hover td {
-    border-color: var(--table-border-light);
-    background-color: rgba(0, 0, 0, 0.05);
 }
 
 /* Cell focus effect */
@@ -794,10 +901,6 @@ body.light-theme .excel-table tr:hover td {
     font-weight: 500;
     text-align: center;
     position: relative;
-}
-
-body.light-theme .merged-cell {
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 165, 0, 0.1) 100%);
 }
 
 .merged-cell::after {
@@ -969,10 +1072,6 @@ body.light-theme .merged-cell {
     box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
 }
 
-body.light-theme .update-content {
-    background: rgba(255, 255, 255, 0.8);
-}
-
 .update-spinner {
     width: 60px;
     height: 60px;
@@ -989,44 +1088,6 @@ body.light-theme .update-content {
     font-weight: bold;
 }
 
-/* Theme Toggle Button */
-.theme-toggle-btn {
-    position: fixed;
-    bottom: 80px;
-    left: 20px;
-    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
-    color: #000;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 30px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: bold;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
-    transition: all 0.3s ease;
-    z-index: 150;
-}
-
-.theme-toggle-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
-}
-
-.theme-toggle-btn:active {
-    transform: translateY(-1px);
-}
-
-.theme-icon {
-    font-size: 18px;
-    transition: transform 0.3s ease;
-}
-
-.theme-toggle-btn:hover .theme-icon {
-    transform: rotate(180deg);
-}
 
 /* Designer Button */
 .designer-btn {
@@ -1098,10 +1159,6 @@ body.light-theme .update-content {
     transition: transform 0.3s ease;
 }
 
-body.light-theme .modal-content {
-    background: rgba(255, 255, 255, 0.8);
-}
-
 .designer-modal.show .modal-content {
     transform: scale(1);
 }
@@ -1159,11 +1216,6 @@ body.light-theme .modal-content {
     border: 1px solid rgba(255, 215, 0, 0.2);
 }
 
-body.light-theme .designer-info {
-    background: rgba(255, 215, 0, 0.2);
-    border: 1px solid rgba(255, 215, 0, 0.3);
-}
-
 .designer-info h3 {
     color: var(--accent-primary);
     font-size: 20px;
@@ -1182,11 +1234,6 @@ body.light-theme .designer-info {
     -webkit-backdrop-filter: blur(8px);
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-body.light-theme .contact-info {
-    background: rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .contact-info p {
@@ -1220,42 +1267,29 @@ body.light-theme .contact-info {
 
 /* Responsive */
 @media (max-width: 768px) {
-    .sidebar {
-        width: 200px;
+    .company-logo,
+    .company-logo.fallback {
+        width: 110px;
+        height: 110px;
+        font-size: 44px;
     }
-    .main-content.sidebar-open {
-        margin-right: 200px;
-    }
-    .company-logo {
-        width: 100px;
-        height: 100px;
-        font-size: 40px;
+    .header {
+        padding: 30px 40px;
+        border-radius: 20px;
     }
     .header h1 {
-        font-size: 24px;
+        font-size: 26px;
     }
-    .header::before {
-        width: 30px;
-        height: 30px;
+    .header p {
+        font-size: 12px;
     }
     .upload-area {
         padding: 30px 15px;
-    }
-    .sheet-btn {
-        padding: 12px;
-        font-size: 12px;
     }
     .excel-table th,
     .excel-table td {
         padding: 10px;
         font-size: 11px;
-    }
-    
-    .theme-toggle-btn {
-        padding: 10px 16px;
-        font-size: 12px;
-        bottom: 75px;
-        left: 15px;
     }
     .designer-btn {
         padding: 10px 16px;
@@ -1276,6 +1310,16 @@ body.light-theme .contact-info {
     .phone-link {
         font-size: 14px;
         padding: 10px 16px;
+    }
+    .nav-buttons-container {
+        max-width: 280px;
+    }
+    .nav-sheet-btn {
+        padding: 14px 18px;
+        font-size: 13px;
+    }
+    .click-hint {
+        font-size: 11px;
     }
 }
 
@@ -1336,39 +1380,37 @@ body.light-theme .contact-info {
 <body>
     <div class="bg-overlay"></div>
     <div class="app-container">
-        <!-- Sidebar -->
-        <div class="sidebar hidden" id="sidebar">
-            <div class="sidebar-header">
-                <h2>صفحات الملف</h2>
-            </div>
-            
-            <!-- Refresh Section -->
-            <div class="refresh-section">
-                <button class="refresh-btn" id="refreshBtn" onclick="refreshData()">
-                    <span class="refresh-icon">🔄</span>
-                    <span>تحديث البيانات</span>
-                </button>
-                <div class="auto-refresh-status">
-                    <div class="auto-refresh-indicator" id="autoRefreshIndicator"></div>
-                    <span>تحديث تلقائي</span>
-                </div>
-                <div class="last-update" id="lastUpdate">آخر تحديث: --:--</div>
-            </div>
-            
-            <div class="sheet-buttons" id="sheetButtons"></div>
-        </div>
+
         
         <!-- Main Content -->
         <div class="main-content" id="mainContent">
-            <header class="header">
-                <!-- Company Logo -->
-                <div class="company-logo fallback" id="companyLogo" onclick="toggleSidebar()">
-                    قبلاوي
-                </div>
+            <div class="landing-container">
+                <header class="header">
+                    <!-- Company Logo -->
+                    <div class="company-logo fallback" id="companyLogo" onclick="toggleNavButtons()">
+                        قبلاوي
+                    </div>
+                    
+                    <h1>قبلاوي</h1>
+                    <p>عرض ملفات الإكسل بكل تفاصيلها على هاتفك</p>
+                    
+                    <span class="click-hint" id="clickHint">اضغط على الشعار لعرض الصفحات</span>
+                </header>
                 
-                <h1>قبلاوي</h1>
-                <p>عرض ملفات الإكسل بكل تفاصيلها على هاتفك</p>
-            </header>
+                <!-- Navigation Buttons (hidden by default) -->
+                <div class="nav-buttons-container" id="navButtonsContainer">
+                    <button class="nav-refresh-btn" id="refreshBtn" onclick="refreshData()">
+                        <span class="refresh-icon">🔄</span>
+                        <span>تحديث البيانات</span>
+                    </button>
+                    <div class="nav-refresh-status">
+                        <div class="auto-refresh-indicator" id="autoRefreshIndicator"></div>
+                        <span>تحديث تلقائي</span>
+                    </div>
+                    <div class="nav-last-update" id="lastUpdate">آخر تحديث: --:--</div>
+                    <div id="sheetButtons"></div>
+                </div>
+            </div>
             <div class="loading" id="loading">
                 <div class="loading-content">
                     <div class="loading-spinner"></div>
@@ -1417,12 +1459,7 @@ body.light-theme .contact-info {
         <span>وضع عدم الاتصال</span>
     </div>
     
-    <!-- Theme Toggle Button -->
-    <button class="theme-toggle-btn" id="themeToggleBtn">
-        <span class="theme-icon" id="themeIcon">🌙</span>
-        <span id="themeText">الوضع النهاري</span>
-    </button>
-    
+
     <!-- Designer Button -->
     <button class="designer-btn" id="designerBtn">
         <span class="designer-icon">👨‍💻</span>
@@ -1642,7 +1679,6 @@ window.onload = function() {
 
     loadGoogleSheet();
     initDesignerModal();
-    initThemeToggle();
     tryLoadCompanyLogo();
     
     // Add event listeners for online/offline status
@@ -1659,58 +1695,18 @@ window.onload = function() {
     });
 };
 
-// Function to toggle sidebar
-function toggleSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    const mainContent = document.getElementById('mainContent');
+// Function to toggle navigation buttons
+function toggleNavButtons() {
+    const container = document.getElementById('navButtonsContainer');
+    const hint = document.getElementById('clickHint');
     
-    if (sidebar.classList.contains('hidden')) {
-        // Open sidebar
-        sidebar.classList.remove('hidden');
-        sidebar.classList.add('visible');
-        mainContent.classList.add('sidebar-open');
-        sidebar.style.display = 'flex';
+    if (container.classList.contains('show')) {
+        container.classList.remove('show');
+        if (hint) hint.classList.remove('hidden');
     } else {
-        // Close sidebar
-        sidebar.classList.remove('visible');
-        sidebar.classList.add('hidden');
-        mainContent.classList.remove('sidebar-open');
-        setTimeout(() => {
-            if (sidebar.classList.contains('hidden')) {
-                sidebar.style.display = 'none';
-            }
-        }, 300); // Wait for transition to complete
+        container.classList.add('show');
+        if (hint) hint.classList.add('hidden');
     }
-}
-
-function initThemeToggle() {
-    const themeToggleBtn = document.getElementById('themeToggleBtn');
-    const themeIcon = document.getElementById('themeIcon');
-    const themeText = document.getElementById('themeText');
-    
-    // Load saved theme preference
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    if (savedTheme === 'light') {
-        document.body.classList.add('light-theme');
-        themeIcon.textContent = '☀️';
-        themeText.textContent = 'الوضع الليلي';
-    }
-    
-    themeToggleBtn.addEventListener('click', function() {
-        const isLightTheme = document.body.classList.toggle('light-theme');
-        
-        if (isLightTheme) {
-            themeIcon.textContent = '☀️';
-            themeText.textContent = 'الوضع الليلي';
-            localStorage.setItem('theme', 'light');
-            showToast('تم التبديل إلى الوضع النهاري', 'info');
-        } else {
-            themeIcon.textContent = '🌙';
-            themeText.textContent = 'الوضع النهاري';
-            localStorage.setItem('theme', 'dark');
-            showToast('تم التبديل إلى الوضع الليلي', 'info');
-        }
-    });
 }
 
 function tryLoadCompanyLogo() {
@@ -1833,11 +1829,6 @@ function loadGoogleSheet() {
             // Create sheet buttons
             createSheetButtons(workbook.SheetNames);
             
-            // Show sidebar as hidden by default
-            const sidebar = document.getElementById('sidebar');
-            sidebar.style.display = 'none';
-            sidebar.classList.add('hidden');
-            
             // Update last refresh time
             lastRefreshTime = localData.lastUpdate;
             updateLastRefreshTime();
@@ -1918,12 +1909,6 @@ function loadGoogleSheet() {
                 
                 // Create sheet buttons
                 createSheetButtons(workbook.SheetNames);
-                
-                // Show sidebar as hidden by default
-                const sidebar = document.getElementById('sidebar');
-                sidebar.style.display = 'none';
-                sidebar.classList.add('hidden');
-                
                 document.getElementById('loading').style.display = 'none';
                 
                 // Stop progress simulation
@@ -1968,12 +1953,6 @@ function loadGoogleSheet() {
                 
                 // Create sheet buttons
                 createSheetButtons(workbook.SheetNames);
-                
-                // Show sidebar as hidden by default
-                const sidebar = document.getElementById('sidebar');
-                sidebar.style.display = 'none';
-                sidebar.classList.add('hidden');
-                
                 // Update last refresh time
                 lastRefreshTime = localData.lastUpdate;
                 updateLastRefreshTime();
@@ -2176,11 +2155,6 @@ function handleFileUpload(file) {
             // Create sheet buttons
             createSheetButtons(workbook.SheetNames);
             
-            // Show sidebar as hidden by default
-            const sidebar = document.getElementById('sidebar');
-            sidebar.style.display = 'none';
-            sidebar.classList.add('hidden');
-            
             document.getElementById('loading').style.display = 'none';
             
             // Stop progress simulation
@@ -2217,7 +2191,7 @@ function createSheetButtons(sheetNames) {
     
     sheetNames.forEach((name, index) => {
         const btn = document.createElement('button');
-        btn.className = 'sheet-btn';
+        btn.className = 'nav-sheet-btn';
         if (index === currentSheetIndex) {
             btn.classList.add('active');
         }
